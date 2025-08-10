@@ -3,277 +3,823 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator PWA</title>
+    <title>Python Calculator PWA</title>
     
-    <!-- Minimal PWA Manifest - Guaranteed to work -->
+    <!-- Link to separate manifest.json file -->
     <link rel="manifest" href="manifest.json">
     
+    <!-- Apple-specific PWA meta tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="PyCalc">
+    
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            max-width: 400px;
-            margin: 50px auto;
-            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            padding: 20px;
         }
-        
+
         .container {
+            max-width: 800px;
+            margin: 0 auto;
             background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
         }
-        
-        h1 {
+
+        .header {
+            background: linear-gradient(45deg, #2e3d4d, #4a5568);
+            color: white;
+            padding: 20px;
             text-align: center;
-            color: #333;
-            margin-bottom: 30px;
         }
-        
-        .status {
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            font-weight: bold;
+
+        .nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            padding: 20px;
+            background: #f7fafc;
+            border-bottom: 1px solid #e2e8f0;
         }
-        
-        .success { background: #d4edda; color: #155724; }
-        .warning { background: #fff3cd; color: #856404; }
-        .error { background: #f8d7da; color: #721c24; }
-        
-        input, button, select {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        
-        button {
-            background: #28a745;
+
+        .nav-btn {
+            padding: 10px 20px;
+            background: #4299e1;
             color: white;
             border: none;
+            border-radius: 6px;
             cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
         }
-        
+
+        .nav-btn:hover, .nav-btn.active {
+            background: #3182ce;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(66, 153, 225, 0.3);
+        }
+
+        .calculator {
+            padding: 30px;
+            display: none;
+        }
+
+        .calculator.active {
+            display: block;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #4299e1;
+        }
+
+        button {
+            background: linear-gradient(45deg, #48bb78, #38a169);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin: 5px;
+        }
+
         button:hover {
-            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
         }
-        
+
         .result {
             margin-top: 20px;
             padding: 15px;
-            background: #f8f9fa;
-            border-left: 4px solid #28a745;
-            border-radius: 5px;
-            font-weight: bold;
+            background: #f0fff4;
+            border-left: 4px solid #48bb78;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 600;
         }
-        
-        .install-btn {
-            background: #007bff;
+
+        .error {
+            background: #fed7d7;
+            border-left-color: #e53e3e;
+            color: #c53030;
+        }
+
+        .code-editor {
             margin-top: 20px;
         }
-        
-        .install-btn:hover {
-            background: #0056b3;
+
+        #customCode {
+            font-family: 'Courier New', monospace;
+            height: 200px;
+            resize: vertical;
         }
-        
-        #installSection {
-            margin-top: 30px;
-            padding: 20px;
-            background: #e9ecef;
-            border-radius: 5px;
+
+        .install-prompt {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #2d3748;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            display: none;
+            z-index: 1000;
+        }
+
+        .install-btn {
+            background: #4299e1;
+            margin-left: 10px;
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+
+        .pwa-status {
+            background: #e2e8f0;
+            padding: 10px;
+            border-bottom: 1px solid #cbd5e0;
+            font-size: 12px;
             text-align: center;
+        }
+
+        .status-item {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .status-success { background: #c6f6d5; color: #22543d; }
+        .status-warning { background: #fef5e7; color: #c05621; }
+        .status-error { background: #fed7d7; color: #c53030; }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+                border-radius: 8px;
+            }
+            
+            .nav {
+                padding: 15px;
+            }
+            
+            .nav-btn {
+                font-size: 12px;
+                padding: 8px 16px;
+            }
+            
+            .calculator {
+                padding: 20px;
+            }
+
+            .pwa-status {
+                font-size: 10px;
+            }
+
+            .status-item {
+                margin: 2px;
+                padding: 2px 4px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🧮 Calculator PWA</h1>
-        
-        <!-- PWA Status -->
-        <div id="pwaStatus">
-            <div class="status warning">🔄 Checking PWA status...</div>
+        <div class="header">
+            <h1>🐕 Python Calculator PWA</h1>
+            <p>Portable calculators with Python power</p>
+        </div>
+
+        <!-- PWA Status Bar -->
+        <div class="pwa-status" id="pwaStatus">
+            <span class="status-item status-warning">🔄 Loading...</span>
         </div>
         
-        <!-- Simple Calculator -->
-        <div>
-            <input type="number" id="num1" placeholder="First number">
-            <select id="operation">
-                <option value="+">Addition (+)</option>
-                <option value="-">Subtraction (-)</option>
-                <option value="*">Multiplication (×)</option>
-                <option value="/">Division (÷)</option>
-            </select>
-            <input type="number" id="num2" placeholder="Second number">
-            <button onclick="calculate()">Calculate</button>
-            <div id="result"></div>
+        <div class="nav">
+            <button class="nav-btn active" onclick="showCalculator('area')">Area Converter</button>
+            <button class="nav-btn" onclick="showCalculator('currency')">Currency Converter</button>
+            <button class="nav-btn" onclick="showCalculator('math')">Math Calculator</button>
+            <button class="nav-btn" onclick="showCalculator('custom')">Custom Code</button>
+            <button class="nav-btn" onclick="showCalculator('temperature')">Temperature</button>
         </div>
-        
-        <!-- Install Section -->
-        <div id="installSection">
-            <div id="installStatus">🔍 Looking for install option...</div>
-            <button id="installBtn" onclick="installApp()" style="display:none;" class="install-btn">
-                📱 Install App
-            </button>
+
+        <!-- Area Converter -->
+        <div id="area" class="calculator active">
+            <h2>Area Converter</h2>
+            <div class="input-group">
+                <label for="sqfeet">Square Feet:</label>
+                <input type="number" id="sqfeet" placeholder="Enter square feet" step="any">
+            </div>
+            <button onclick="convertArea()">Convert to Acres</button>
+            <div id="areaResult"></div>
+        </div>
+
+        <!-- Currency Converter -->
+        <div id="currency" class="calculator">
+            <h2>Currency Converter</h2>
+            <div class="input-group">
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" placeholder="Enter amount" step="any">
+            </div>
+            <div class="input-group">
+                <label for="fromCurrency">From:</label>
+                <select id="fromCurrency">
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="GBP">GBP</option>
+                    <option value="JPY">JPY</option>
+                    <option value="CAD">CAD</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="toCurrency">To:</label>
+                <select id="toCurrency">
+                    <option value="EUR">EUR</option>
+                    <option value="USD">USD</option>
+                    <option value="GBP">GBP</option>
+                    <option value="JPY">JPY</option>
+                    <option value="CAD">CAD</option>
+                </select>
+            </div>
+            <button onclick="convertCurrency()">Convert</button>
+            <div id="currencyResult"></div>
+        </div>
+
+        <!-- Math Calculator -->
+        <div id="math" class="calculator">
+            <h2>Advanced Math Calculator</h2>
+            <div class="input-group">
+                <label for="expression">Python Expression:</label>
+                <input type="text" id="expression" placeholder="e.g., sqrt(16) + pow(2, 3)" value="sqrt(16) + pow(2, 3)">
+            </div>
+            <button onclick="calculateMath()">Calculate</button>
+            <div id="mathResult"></div>
+            
+            <h3 style="margin-top: 30px;">Quick Math Functions</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
+                <button onclick="insertFunction('sqrt()')">√ Square Root</button>
+                <button onclick="insertFunction('pow(2, 3)')">x^y Power</button>
+                <button onclick="insertFunction('sin()')">sin(x)</button>
+                <button onclick="insertFunction('cos()')">cos(x)</button>
+                <button onclick="insertFunction('tan()')">tan(x)</button>
+                <button onclick="insertFunction('log()')">log(x)</button>
+                <button onclick="insertFunction('factorial(5)')">n! Factorial</button>
+                <button onclick="insertFunction('pi')">π Pi</button>
+            </div>
+        </div>
+
+        <!-- Temperature Converter -->
+        <div id="temperature" class="calculator">
+            <h2>Temperature Converter</h2>
+            <div class="input-group">
+                <label for="tempValue">Temperature:</label>
+                <input type="number" id="tempValue" placeholder="Enter temperature" step="any">
+            </div>
+            <div class="input-group">
+                <label for="fromTemp">From:</label>
+                <select id="fromTemp">
+                    <option value="celsius">Celsius (°C)</option>
+                    <option value="fahrenheit">Fahrenheit (°F)</option>
+                    <option value="kelvin">Kelvin (K)</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="toTemp">To:</label>
+                <select id="toTemp">
+                    <option value="fahrenheit">Fahrenheit (°F)</option>
+                    <option value="celsius">Celsius (°C)</option>
+                    <option value="kelvin">Kelvin (K)</option>
+                </select>
+            </div>
+            <button onclick="convertTemperature()">Convert Temperature</button>
+            <div id="tempResult"></div>
+        </div>
+
+        <!-- Custom Code -->
+        <div id="custom" class="calculator">
+            <h2>Custom Python Code</h2>
+            <div class="input-group">
+                <label for="customCode">Python Code:</label>
+                <textarea id="customCode" placeholder="Write your Python code here...">
+# Example: Temperature conversion
+celsius = 25
+fahrenheit = celsius * 9/5 + 32
+print(f"{celsius}°C = {fahrenheit}°F")
+
+# Example: List operations
+numbers = [1, 2, 3, 4, 5]
+squared = [x**2 for x in numbers]
+print(f"Original: {numbers}")
+print(f"Squared: {squared}")
+
+# Example: Simple statistics
+import statistics as stats
+data = [10, 20, 30, 40, 50]
+print(f"Mean: {stats.mean(data)}")
+print(f"Median: {stats.median(data)}")
+                </textarea>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+                <button onclick="runCustomCode()"> Run Python Code</button>
+                <button onclick="clearCode()"> Clear Code</button>
+                <button onclick="loadExample('math')">📊 Load Math Example</button>
+                <button onclick="loadExample('data')">📈 Load Data Example</button>
+            </div>
+            <div id="customResult"></div>
         </div>
     </div>
 
+    <div class="install-prompt" id="installPrompt">
+        📱 Install this app for easy access!
+        <button class="install-btn" onclick="installPWA()">Install</button>
+        <button class="install-btn" onclick="hideInstallPrompt()">Later</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
     <script>
+        let pyodide = null;
         let deferredPrompt = null;
-        let installChecks = 0;
-        
-        // Calculator function
-        function calculate() {
-            const num1 = parseFloat(document.getElementById('num1').value);
-            const num2 = parseFloat(document.getElementById('num2').value);
-            const operation = document.getElementById('operation').value;
-            const resultDiv = document.getElementById('result');
+
+        // Initialize Pyodide
+        async function initPyodide() {
+            if (!pyodide) {
+                try {
+                    updatePWAStatus(' Loading Python...', 'warning');
+                    pyodide = await loadPyodide();
+                    console.log("Pyodide loaded successfully");
+                    updatePWAStatus(' Python Ready', 'success');
+                } catch (error) {
+                    console.error("Failed to load Pyodide:", error);
+                    updatePWAStatus('❌ Python Failed', 'error');
+                }
+            }
+            return pyodide;
+        }
+
+        // PWA Status Update
+        function updatePWAStatus(message, type) {
+            const statusDiv = document.getElementById('pwaStatus');
+            const existingItems = statusDiv.querySelectorAll('.status-item:not([data-permanent])');
             
-            if (isNaN(num1) || isNaN(num2)) {
-                resultDiv.innerHTML = '<div class="result" style="border-left-color: #dc3545;">Please enter valid numbers</div>';
+            // Remove non-permanent status items
+            existingItems.forEach(item => {
+                if (!item.getAttribute('data-permanent')) {
+                    item.remove();
+                }
+            });
+            
+            // Add new status
+            const statusItem = document.createElement('span');
+            statusItem.className = `status-item status-${type}`;
+            statusItem.textContent = message;
+            statusDiv.appendChild(statusItem);
+        }
+
+        // Initialize on load
+        initPyodide();
+
+        // Calculator switching
+        function showCalculator(calcId) {
+            // Hide all calculators
+            document.querySelectorAll('.calculator').forEach(calc => {
+                calc.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected calculator
+            document.getElementById(calcId).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Area converter
+        function convertArea() {
+            const sqfeet = parseFloat(document.getElementById('sqfeet').value);
+            const resultDiv = document.getElementById('areaResult');
+            
+            if (isNaN(sqfeet)) {
+                resultDiv.innerHTML = '<div class="result error">Please enter a valid number</div>';
+                return;
+            }
+            
+            const acres = sqfeet / 43560;
+            const hectares = sqfeet * 0.000009290304;
+            
+            resultDiv.innerHTML = `
+                <div class="result">
+                    <strong>${sqfeet} sq ft equals:</strong><br>
+                     ${acres.toFixed(6)} acres<br>
+                     ${hectares.toFixed(6)} hectares
+                </div>
+            `;
+        }
+
+        // Currency converter (enhanced with more currencies)
+        async function convertCurrency() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            const from = document.getElementById('fromCurrency').value;
+            const to = document.getElementById('toCurrency').value;
+            const resultDiv = document.getElementById('currencyResult');
+            
+            if (isNaN(amount)) {
+                resultDiv.innerHTML = '<div class="result error">Please enter a valid amount</div>';
+                return;
+            }
+            
+            // Enhanced exchange rates
+            const rates = {
+                'USD': { 'EUR': 0.85, 'GBP': 0.73, 'JPY': 110, 'CAD': 1.25 },
+                'EUR': { 'USD': 1.18, 'GBP': 0.86, 'JPY': 129, 'CAD': 1.47 },
+                'GBP': { 'USD': 1.37, 'EUR': 1.16, 'JPY': 150, 'CAD': 1.71 },
+                'JPY': { 'USD': 0.0091, 'EUR': 0.0078, 'GBP': 0.0067, 'CAD': 0.0114 },
+                'CAD': { 'USD': 0.80, 'EUR': 0.68, 'GBP': 0.58, 'JPY': 87.7 }
+            };
+            
+            if (from === to) {
+                resultDiv.innerHTML = `<div class="result">${amount} ${from}</div>`;
+                return;
+            }
+            
+            const rate = rates[from][to];
+            const converted = (amount * rate).toFixed(2);
+            resultDiv.innerHTML = `
+                <div class="result">
+                     ${amount} ${from} = ${converted} ${to}<br>
+                    <small>Rate: 1 ${from} = ${rate} ${to}</small>
+                </div>
+            `;
+        }
+
+        // Temperature converter
+        function convertTemperature() {
+            const value = parseFloat(document.getElementById('tempValue').value);
+            const from = document.getElementById('fromTemp').value;
+            const to = document.getElementById('toTemp').value;
+            const resultDiv = document.getElementById('tempResult');
+            
+            if (isNaN(value)) {
+                resultDiv.innerHTML = '<div class="result error">Please enter a valid temperature</div>';
                 return;
             }
             
             let result;
-            switch(operation) {
-                case '+': result = num1 + num2; break;
-                case '-': result = num1 - num2; break;
-                case '*': result = num1 * num2; break;
-                case '/': 
-                    if (num2 === 0) {
-                        resultDiv.innerHTML = '<div class="result" style="border-left-color: #dc3545;">Cannot divide by zero</div>';
-                        return;
-                    }
-                    result = num1 / num2; 
-                    break;
+            let fromSymbol, toSymbol;
+            
+            // Convert to Celsius first, then to target
+            let celsius = value;
+            if (from === 'fahrenheit') {
+                celsius = (value - 32) * 5/9;
+                fromSymbol = '°F';
+            } else if (from === 'kelvin') {
+                celsius = value - 273.15;
+                fromSymbol = 'K';
+            } else {
+                fromSymbol = '°C';
             }
             
-            resultDiv.innerHTML = `<div class="result">${num1} ${operation} ${num2} = ${result}</div>`;
+            // Convert from Celsius to target
+            if (to === 'fahrenheit') {
+                result = celsius * 9/5 + 32;
+                toSymbol = '°F';
+            } else if (to === 'kelvin') {
+                result = celsius + 273.15;
+                toSymbol = 'K';
+            } else {
+                result = celsius;
+                toSymbol = '°C';
+            }
+            
+            resultDiv.innerHTML = `
+                <div class="result">
+                     ${value}${fromSymbol} = ${result.toFixed(2)}${toSymbol}
+                </div>
+            `;
         }
-        
-        // PWA Status Check
-        function updatePWAStatus() {
-            const statusDiv = document.getElementById('pwaStatus');
-            let status = [];
+
+        // Math calculator using Pyodide
+        async function calculateMath() {
+            const expression = document.getElementById('expression').value;
+            const resultDiv = document.getElementById('mathResult');
             
-            // Check HTTPS
-            if (location.protocol === 'https:' || location.hostname === 'localhost') {
-                status.push('<div class="status success">✅ HTTPS: Secure</div>');
-            } else {
-                status.push('<div class="status error">❌ HTTPS: Required</div>');
+            if (!expression.trim()) {
+                resultDiv.innerHTML = '<div class="result error">Please enter an expression</div>';
+                return;
             }
             
-            // Check Service Worker
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.getRegistrations().then(registrations => {
-                    if (registrations.length > 0) {
-                        status.push('<div class="status success">✅ Service Worker: Active</div>');
-                    } else {
-                        status.push('<div class="status warning">⚠️ Service Worker: Registering...</div>');
-                    }
-                    statusDiv.innerHTML = status.join('');
-                });
-            } else {
-                status.push('<div class="status error">❌ Service Worker: Not supported</div>');
+            try {
+                await initPyodide();
+                const result = pyodide.runPython(`
+import math
+from math import *
+import statistics
+# Custom factorial function
+def factorial(n):
+    if n <= 1: return 1
+    return n * factorial(n-1)
+
+result = ${expression}
+result
+                `);
+                resultDiv.innerHTML = `<div class="result"> ${expression} = ${result}</div>`;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="result error">Error: ${error.message}</div>`;
             }
-            
-            // Check beforeinstallprompt
-            if (deferredPrompt) {
-                status.push('<div class="status success">✅ Install Prompt: Ready!</div>');
-                document.getElementById('installBtn').style.display = 'block';
-                document.getElementById('installStatus').innerHTML = '🎉 Ready to install!';
-            } else {
-                status.push('<div class="status warning">⏳ Install Prompt: Waiting...</div>');
-            }
-            
-            statusDiv.innerHTML = status.join('');
         }
-        
-        // Install App Function
-        function installApp() {
+
+        // Insert math function
+        function insertFunction(func) {
+            const input = document.getElementById('expression');
+            input.value = func;
+            input.focus();
+        }
+
+        // Custom code examples
+        function loadExample(type) {
+            const codeArea = document.getElementById('customCode');
+            
+            if (type === 'math') {
+                codeArea.value = `# Advanced Math Examples
+import math
+
+# Circle calculations
+radius = 5
+area = math.pi * radius ** 2
+circumference = 2 * math.pi * radius
+print(f"Circle with radius {radius}:")
+print(f"Area: {area:.2f}")
+print(f"Circumference: {circumference:.2f}")
+
+# Quadratic equation solver
+a, b, c = 1, -5, 6  # x² - 5x + 6 = 0
+discriminant = b**2 - 4*a*c
+if discriminant >= 0:
+    x1 = (-b + math.sqrt(discriminant)) / (2*a)
+    x2 = (-b - math.sqrt(discriminant)) / (2*a)
+    print(f"\\nQuadratic solutions: x1={x1}, x2={x2}")
+else:
+    print("\\nNo real solutions")`;
+            } else if (type === 'data') {
+                codeArea.value = `# Data Analysis Examples
+import statistics as stats
+
+# Sample data
+scores = [85, 92, 78, 96, 89, 73, 91, 87, 94, 82]
+temperatures = [22.5, 25.1, 23.8, 26.2, 24.7, 21.9, 27.3]
+
+print(" Grade Analysis:")
+print(f"Scores: {scores}")
+print(f"Average: {stats.mean(scores):.1f}")
+print(f"Median: {stats.median(scores)}")
+print(f"Highest: {max(scores)}")
+print(f"Lowest: {min(scores)}")
+
+print("\\n Temperature Analysis:")
+print(f"Temperatures: {temperatures}")
+print(f"Average: {stats.mean(temperatures):.1f}°C")
+print(f"Range: {max(temperatures) - min(temperatures):.1f}°C")
+
+# Grade distribution
+grade_counts = {}
+for score in scores:
+    if score >= 90: grade = 'A'
+    elif score >= 80: grade = 'B'
+    elif score >= 70: grade = 'C'
+    else: grade = 'F'
+    grade_counts[grade] = grade_counts.get(grade, 0) + 1
+
+print(f"\\n📈 Grade Distribution: {grade_counts}")`;
+            }
+        }
+
+        // Clear code
+        function clearCode() {
+            document.getElementById('customCode').value = '';
+            document.getElementById('customResult').innerHTML = '';
+        }
+
+        // Custom code runner
+        async function runCustomCode() {
+            const code = document.getElementById('customCode').value;
+            const resultDiv = document.getElementById('customResult');
+            
+            if (!code.trim()) {
+                resultDiv.innerHTML = '<div class="result error">Please enter some Python code</div>';
+                return;
+            }
+            
+            try {
+                await initPyodide();
+                
+                // Capture print output
+                pyodide.runPython(`
+import sys
+from io import StringIO
+sys.stdout = StringIO()
+                `);
+                
+                // Run user code
+                pyodide.runPython(code);
+                
+                // Get output
+                const output = pyodide.runPython('sys.stdout.getvalue()');
+                
+                resultDiv.innerHTML = `<div class="result"><pre>${output || 'Code executed successfully (no output)'}</pre></div>`;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="result error">Error: ${error.message}</div>`;
+            }
+        }
+
+        // Enhanced PWA Installation
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('installPrompt').style.display = 'block';
+            updatePWAStatus(' Install Available', 'success');
+        });
+
+        function installPWA() {
             if (deferredPrompt) {
                 deferredPrompt.prompt();
                 deferredPrompt.userChoice.then((choiceResult) => {
-                    console.log('Install result:', choiceResult.outcome);
                     if (choiceResult.outcome === 'accepted') {
-                        document.getElementById('installStatus').innerHTML = '✅ App installed successfully!';
-                    } else {
-                        document.getElementById('installStatus').innerHTML = '❌ Installation cancelled';
+                        updatePWAStatus(' Installed', 'success');
                     }
                     deferredPrompt = null;
-                    updatePWAStatus();
+                    hideInstallPrompt();
                 });
             }
         }
-        
-        // Listen for beforeinstallprompt
-        window.addEventListener('beforeinstallprompt', (e) => {
-            console.log('🎉 beforeinstallprompt fired!');
-            e.preventDefault();
-            deferredPrompt = e;
-            updatePWAStatus();
-        });
-        
+
+        function hideInstallPrompt() {
+            document.getElementById('installPrompt').style.display = 'none';
+        }
+
+        // Enhanced Service Worker
+        const swCode = `
+const CACHE_NAME = 'python-calculator-v3';
+const urlsToCache = [
+  './',
+  './manifest.json',
+  'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js',
+  'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.asm.js',
+  'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.asm.wasm'
+];
+
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache => {
+        console.log(' Caching app shell');
+        return cache.addAll(urlsToCache);
+      })
+  );
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cacheName => {
+          if (cacheName !== CACHE_NAME) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
+  );
+});
+
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request)
+      .then(response => {
+        if (response) {
+          return response;
+        }
+        return fetch(event.request);
+      }
+    )
+  );
+});
+        `;
+
         // Register Service Worker
         if ('serviceWorker' in navigator) {
-            const swCode = `
-                const CACHE_NAME = 'calc-pwa-v1';
-                const urlsToCache = ['./'];
-                
-                self.addEventListener('install', event => {
-                    event.waitUntil(
-                        caches.open(CACHE_NAME)
-                            .then(cache => cache.addAll(urlsToCache))
-                    );
-                    self.skipWaiting();
-                });
-                
-                self.addEventListener('activate', event => {
-                    event.waitUntil(self.clients.claim());
-                });
-                
-                self.addEventListener('fetch', event => {
-                    event.respondWith(
-                        caches.match(event.request)
-                            .then(response => response || fetch(event.request))
-                    );
-                });
-            `;
-            
             const blob = new Blob([swCode], { type: 'application/javascript' });
             const swUrl = URL.createObjectURL(blob);
             
             navigator.serviceWorker.register(swUrl)
                 .then(registration => {
-                    console.log('✅ SW registered');
-                    updatePWAStatus();
+                    console.log('Service Worker registered successfully');
+                    updatePWAStatus('🔧 Offline Ready', 'success');
                 })
                 .catch(error => {
-                    console.log('❌ SW failed:', error);
-                    updatePWAStatus();
+                    console.log('Service Worker registration failed:', error);
+                    updatePWAStatus('❌ Offline Failed', 'error');
                 });
         }
-        
-        // Check install status periodically
-        function checkInstallStatus() {
-            installChecks++;
-            updatePWAStatus();
-            
-            if (installChecks < 20 && !deferredPrompt) {
-                setTimeout(checkInstallStatus, 2000);
-            } else if (!deferredPrompt) {
-                document.getElementById('installStatus').innerHTML = `
-                    ❌ Install prompt not triggered<br>
-                    <small>Try: Chrome menu → "Add to Home Screen"</small>
-                `;
+
+        // Save state to localStorage for persistence
+        function saveCalculatorState() {
+            const state = {
+                sqfeet: document.getElementById('sqfeet').value,
+                amount: document.getElementById('amount').value,
+                expression: document.getElementById('expression').value,
+                customCode: document.getElementById('customCode').value,
+                tempValue: document.getElementById('tempValue').value
+            };
+            localStorage.setItem('calculatorState', JSON.stringify(state));
+        }
+
+        function loadCalculatorState() {
+            const saved = localStorage.getItem('calculatorState');
+            if (saved) {
+                try {
+                    const state = JSON.parse(saved);
+                    if (state.sqfeet) document.getElementById('sqfeet').value = state.sqfeet;
+                    if (state.amount) document.getElementById('amount').value = state.amount;
+                    if (state.expression) document.getElementById('expression').value = state.expression;
+                    if (state.customCode) document.getElementById('customCode').value = state.customCode;
+                    if (state.tempValue) document.getElementById('tempValue').value = state.tempValue;
+                } catch (e) {
+                    console.log('Could not load saved state');
+                }
             }
         }
+
+        // Auto-save on input changes
+        document.addEventListener('input', saveCalculatorState);
         
-        // Start checking
-        setTimeout(checkInstallStatus, 1000);
+        // Load saved state on startup
+        window.addEventListener('load', loadCalculatorState);
+
+        // Initial status setup
+        setTimeout(() => {
+            updatePWAStatus(' App Ready', 'success');
+        }, 1000);
+
+        // iOS detection and instructions
+        function isIOS() {
+            return /iPad|iPhone|iPod/.test(navigator.userAgent);
+        }
+
+        function isStandalone() {
+            return window.matchMedia('(display-mode: standalone)').matches || 
+                   window.navigator.standalone === true;
+        }
+
+        if (isIOS() && !isStandalone()) {
+            setTimeout(() => {
+                const iosPrompt = document.createElement('div');
+                iosPrompt.className = 'install-prompt';
+                iosPrompt.style.display = 'block';
+                iosPrompt.innerHTML = `
+                    📱 iOS: Tap Share (↗️) → "Add to Home Screen"
+                    <button class="install-btn" onclick="this.parentElement.remove()">Got it</button>
+                `;
+                document.body.appendChild(iosPrompt);
+            }, 3000);
+        }
     </script>
 </body>
 </html>
