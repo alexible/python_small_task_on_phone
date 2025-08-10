@@ -3,401 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python Calculator PWA</title>
+    <title>Calculator PWA</title>
     
-    <!-- Fixed PWA Manifest - Key changes for installability -->
-    <link rel="manifest" href="data:application/json;charset=utf-8;base64,ewogICJuYW1lIjogIlB5dGhvbiBDYWxjdWxhdG9yIiwKICAic2hvcnRfbmFtZSI6ICJQeUNhbGMiLAogICJkZXNjcmlwdGlvbiI6ICJQb3J0YWJsZSBQeXRob24gY2FsY3VsYXRvcnMgZm9yIGV2ZXJ5ZGF5IHVzZSIsCiAgInN0YXJ0X3VybCI6ICIuLyIsCiAgInNjb3BlIjogIi4vIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjMmUzZDRkIiwKICAidGhlbWVfY29sb3IiOiAiIzQyOTllMSIsCiAgIm9yaWVudGF0aW9uIjogImFueSIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBSEFBQUFCd0NBWUFBQUR4Y1EvMUFBQUFnVVRZeTVBQUFBQUJKUlU1RXJrSmdnZz09IiwKICAgICAgInNpemVzIjogIjE5MngxOTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciLAogICAgICAicHVycG9zZSI6ICJhbnkgbWFza2FibGUiCiAgICB9LAogICAgewogICAgICAic3JjIjogImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBUUFBQUFFQUNBWUFBQUROWlhGUEFBQUFJSUVsRVFWUjRBZTJjQzAwVGtWV3JYZW5qWTB4UTgwUWI0K05lRGw4eGdCQjNSbjNQZFlFa0pRQlZLd1ljS0R0ZWlVUnV5QlNOdmRZMXhGcDBBY0dKaHp5NEJrYm1yVGdZOW5LYUNyallrcmpxYjJaNWJ5ajNyWnJxRU0xVE5aR2s5MXloYkd1TzBacTB6dU9vcHlGTGxxZjVIeHYrUW5hWHNQcytrWE10aE41bXJnS3RkZjM0YnMvaU8zaUNnMmV2ekw0TmpOWmw3Mlo5VHF6V0d3dSswSkFKQUd6VFlOZGxKNVYrRzBOSGtxUERBMFBuYWdnMURjdEQxZXcxQjF4N05JOHFRNnRmQVdNSWs2TjNPVk9maGI5cUhzRmxWanE4RGEwNmR2TUZybGQ0b2l6RWF0VVB0QjBlOTVwVFJra0xhQklBSTY4Q0xZdnIzZVVOL3ZEZDBka3pWYTFIeFZEcWdVNFV3aVRJcDlBcGN0WElYOGZKZXh2akYwa1hrSDhmUTN0cHBNVDJJVHhvQVE4TnM2RzFyeGhJSC9BZzNBVFhJNW5ZYVhNd0lLODM4aWUrL1VEaEw4WUpJNElBS0JlQVFFRkNlVy9BZ1FCK1VraXdCZ1BBRG5RQllhdG1IdXZQc3hPLzZGc3ZjaFY0em1wcVpKOUFOY0NsNzhOdEl6WEZnZ0VnU0FCenVIcW02Z1VTcllObDJhYk1MbVdGZGFKVyt2ekZsMDJYQTRJQWREbjBveVFHc3RaWWg0emVQTm1NaE1ScEFWOXJ1N1VWWGhsMXNoZDVKbXB0Wm9PQXZHMzFmcS9qSzUzZlpGaWpZREpBVERGSzFCSFpqQWlrN2psUjhrRnZUWCtQZjEzT09JNG8ybHZ1SHFOdkVCOWZnTG5lbjdZajJ0ZHJkcWZFVUNidXNOdTNLT3FuMDNicWdFUWZRV2JCWGwwSzVUK0ZUaEdQdWRMZlQ1dW5sUTFNNlBySUVHM2tHZGE3dFhNalVuaWVUeFJWdlpyZVhqRjNhZG54NFczNFdLUUlKK3lRUUJJN21YZzd4Mkp5bGhVdXFGMGIvR3g4aXhGRGNrK2hSYUpCM3hJaU5pdVdLSFdBWjlqWXYrNTg1NXlKRTZrMTNPOWNGZDZySWNqS3dDZWRJQUFBSmtvOE5rQzNlVTNPRG1aWXNFNzFibHlWZWFUMkxzY2hYSFJHV1VudGdEUTN4ZlYrekNzUEp3MHpEdUFGUkRRN3JPN0tNMUcxcnJEbVZHNEhBSGFhTCtBUkE4Q0hxMWloOWtrNnRaclBCZm5KZm9KWTFudXVybUZJOWJxNjVqUXdZNS90Sng5cXFpNjI4RzhLVGxEclpJRWkyQ3YzbWl5dzNVZVFKZXZLMjZnMk1aaVpnUnF2MFBDZ1FZZm1Ja0VJVWtjQXlEOGRjZkJNSTRqRHBJQndGS1VjUUNrU1J6NlQraVREWTYwMFVnOE1tT3dKUDd4V3NvU0pKMERHUmlBRE9KYkVseTdtOWJSQWVPZkVlNjFPUEF3QUNhSUJCSFE9IiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciLAogICAgICAicHVycG9zZSI6ICJhbnkgbWFza2FibGUiCiAgICB9CiAgXQp9">
-    
-    <!-- Apple-specific PWA meta tags -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="PyCalc">
+    <!-- Minimal PWA Manifest - Guaranteed to work -->
+    <link rel="manifest" href="manifest.json">
     
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px;
         }
-
+        
         .container {
-            max-width: 800px;
-            margin: 0 auto;
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            overflow: hidden;
-        }
-
-        .header {
-            background: linear-gradient(45deg, #2e3d4d, #4a5568);
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .diagnostic {
-            background: #e2e8f0;
-            padding: 15px;
-            border-bottom: 1px solid #cbd5e0;
-        }
-
-        .status {
-            margin: 5px 0;
-            padding: 8px;
-            border-radius: 4px;
-            font-family: monospace;
-        }
-
-        .status.success { background: #c6f6d5; color: #22543d; }
-        .status.warning { background: #fef5e7; color: #c05621; }
-        .status.error { background: #fed7d7; color: #c53030; }
-
-        .nav {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            padding: 20px;
-            background: #f7fafc;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .nav-btn {
-            padding: 10px 20px;
-            background: #4299e1;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 14px;
-        }
-
-        .nav-btn:hover, .nav-btn.active {
-            background: #3182ce;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(66, 153, 225, 0.3);
-        }
-
-        .calculator {
             padding: 30px;
-            display: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
         }
-
-        .calculator.active {
-            display: block;
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
         }
-
-        .input-group {
-            margin-bottom: 20px;
+        
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-weight: bold;
         }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #2d3748;
-        }
-
-        input, select, textarea {
+        
+        .success { background: #d4edda; color: #155724; }
+        .warning { background: #fff3cd; color: #856404; }
+        .error { background: #f8d7da; color: #721c24; }
+        
+        input, button, select {
             width: 100%;
             padding: 12px;
-            border: 2px solid #e2e8f0;
-            border-radius: 6px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 5px;
             font-size: 16px;
-            transition: border-color 0.3s;
         }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: #4299e1;
-        }
-
+        
         button {
-            background: linear-gradient(45deg, #48bb78, #38a169);
+            background: #28a745;
             color: white;
-            padding: 12px 24px;
             border: none;
-            border-radius: 6px;
             cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            transition: all 0.3s;
-            margin: 5px;
         }
-
+        
         button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
+            background: #218838;
         }
-
+        
         .result {
             margin-top: 20px;
             padding: 15px;
-            background: #f0fff4;
-            border-left: 4px solid #48bb78;
-            border-radius: 6px;
-            font-size: 18px;
-            font-weight: 600;
+            background: #f8f9fa;
+            border-left: 4px solid #28a745;
+            border-radius: 5px;
+            font-weight: bold;
         }
-
-        .error {
-            background: #fed7d7;
-            border-left-color: #e53e3e;
-            color: #c53030;
-        }
-
-        #customCode {
-            font-family: 'Courier New', monospace;
-            height: 200px;
-            resize: vertical;
-        }
-
-        .install-prompt {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #2d3748;
-            color: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            display: none;
-            z-index: 1000;
-        }
-
+        
         .install-btn {
-            background: #4299e1;
-            margin-left: 10px;
-            padding: 8px 16px;
-            font-size: 14px;
+            background: #007bff;
+            margin-top: 20px;
         }
-
-        .force-install {
-            background: #e53e3e;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            margin: 10px;
+        
+        .install-btn:hover {
+            background: #0056b3;
+        }
+        
+        #installSection {
+            margin-top: 30px;
+            padding: 20px;
+            background: #e9ecef;
+            border-radius: 5px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>🧮 Python Calculator PWA</h1>
-            <p>Diagnostic & Fixed Version</p>
+        <h1>🧮 Calculator PWA</h1>
+        
+        <!-- PWA Status -->
+        <div id="pwaStatus">
+            <div class="status warning">🔄 Checking PWA status...</div>
         </div>
         
-        <!-- PWA Diagnostic Section -->
-        <div class="diagnostic">
-            <h3>🔍 PWA Installation Status</h3>
-            <div id="diagnosticResults">
-                <div class="status warning">⏳ Running diagnostics...</div>
-            </div>
-            <button class="force-install" onclick="forceInstall()" id="forceInstallBtn" style="display:none;">
-                🚀 Force Install PWA
+        <!-- Simple Calculator -->
+        <div>
+            <input type="number" id="num1" placeholder="First number">
+            <select id="operation">
+                <option value="+">Addition (+)</option>
+                <option value="-">Subtraction (-)</option>
+                <option value="*">Multiplication (×)</option>
+                <option value="/">Division (÷)</option>
+            </select>
+            <input type="number" id="num2" placeholder="Second number">
+            <button onclick="calculate()">Calculate</button>
+            <div id="result"></div>
+        </div>
+        
+        <!-- Install Section -->
+        <div id="installSection">
+            <div id="installStatus">🔍 Looking for install option...</div>
+            <button id="installBtn" onclick="installApp()" style="display:none;" class="install-btn">
+                📱 Install App
             </button>
         </div>
-        
-        <div class="nav">
-            <button class="nav-btn active" onclick="showCalculator('area')">Area Converter</button>
-            <button class="nav-btn" onclick="showCalculator('currency')">Currency Converter</button>
-            <button class="nav-btn" onclick="showCalculator('math')">Math Calculator</button>
-        </div>
-
-        <!-- Area Converter -->
-        <div id="area" class="calculator active">
-            <h2>Area Converter</h2>
-            <div class="input-group">
-                <label for="sqfeet">Square Feet:</label>
-                <input type="number" id="sqfeet" placeholder="Enter square feet" step="any">
-            </div>
-            <button onclick="convertArea()">Convert to Acres</button>
-            <div id="areaResult"></div>
-        </div>
-
-        <!-- Currency Converter -->
-        <div id="currency" class="calculator">
-            <h2>Currency Converter</h2>
-            <div class="input-group">
-                <label for="amount">Amount:</label>
-                <input type="number" id="amount" placeholder="Enter amount" step="any">
-            </div>
-            <div class="input-group">
-                <label for="fromCurrency">From:</label>
-                <select id="fromCurrency">
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                    <option value="GBP">GBP</option>
-                </select>
-            </div>
-            <div class="input-group">
-                <label for="toCurrency">To:</label>
-                <select id="toCurrency">
-                    <option value="EUR">EUR</option>
-                    <option value="USD">USD</option>
-                    <option value="GBP">GBP</option>
-                </select>
-            </div>
-            <button onclick="convertCurrency()">Convert</button>
-            <div id="currencyResult"></div>
-        </div>
-
-        <!-- Math Calculator -->
-        <div id="math" class="calculator">
-            <h2>Basic Math Calculator</h2>
-            <div class="input-group">
-                <label for="num1">Number 1:</label>
-                <input type="number" id="num1" placeholder="Enter first number" step="any">
-            </div>
-            <div class="input-group">
-                <label for="operation">Operation:</label>
-                <select id="operation">
-                    <option value="+">Addition (+)</option>
-                    <option value="-">Subtraction (-)</option>
-                    <option value="*">Multiplication (×)</option>
-                    <option value="/">Division (÷)</option>
-                    <option value="**">Power (^)</option>
-                </select>
-            </div>
-            <div class="input-group">
-                <label for="num2">Number 2:</label>
-                <input type="number" id="num2" placeholder="Enter second number" step="any">
-            </div>
-            <button onclick="calculateBasicMath()">Calculate</button>
-            <div id="mathResult"></div>
-        </div>
-    </div>
-
-    <div class="install-prompt" id="installPrompt">
-        📱 Install this app for easy access!
-        <button class="install-btn" onclick="installPWA()">Install</button>
-        <button class="install-btn" onclick="hideInstallPrompt()">Later</button>
     </div>
 
     <script>
         let deferredPrompt = null;
-        let installAttempts = 0;
-
-        // PWA Diagnostic Function
-        function runDiagnostics() {
-            const results = document.getElementById('diagnosticResults');
-            let diagnostics = [];
-            
-            // Check HTTPS
-            if (location.protocol === 'https:' || location.hostname === 'localhost') {
-                diagnostics.push('<div class="status success">✅ HTTPS: Secure connection detected</div>');
-            } else {
-                diagnostics.push('<div class="status error">❌ HTTPS: Secure connection required</div>');
-            }
-            
-            // Check Service Worker
-            if ('serviceWorker' in navigator) {
-                diagnostics.push('<div class="status success">✅ Service Worker: Supported</div>');
-            } else {
-                diagnostics.push('<div class="status error">❌ Service Worker: Not supported</div>');
-            }
-            
-            // Check beforeinstallprompt
-            if (deferredPrompt) {
-                diagnostics.push('<div class="status success">✅ Install Prompt: Available</div>');
-                document.getElementById('forceInstallBtn').style.display = 'inline-block';
-            } else {
-                diagnostics.push('<div class="status warning">⚠️ Install Prompt: Not triggered yet</div>');
-            }
-            
-            // Check if already installed
-            if (window.matchMedia('(display-mode: standalone)').matches) {
-                diagnostics.push('<div class="status success">✅ Already installed as PWA</div>');
-            } else {
-                diagnostics.push('<div class="status warning">📱 Not installed yet</div>');
-            }
-            
-            // Check manifest
-            const manifestLink = document.querySelector('link[rel="manifest"]');
-            if (manifestLink) {
-                diagnostics.push('<div class="status success">✅ Manifest: Linked</div>');
-            } else {
-                diagnostics.push('<div class="status error">❌ Manifest: Missing</div>');
-            }
-            
-            results.innerHTML = diagnostics.join('');
-        }
-
-        // Calculator switching
-        function showCalculator(calcId) {
-            document.querySelectorAll('.calculator').forEach(calc => {
-                calc.classList.remove('active');
-            });
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            document.getElementById(calcId).classList.add('active');
-            event.target.classList.add('active');
-        }
-
-        // Area converter
-        function convertArea() {
-            const sqfeet = parseFloat(document.getElementById('sqfeet').value);
-            const resultDiv = document.getElementById('areaResult');
-            
-            if (isNaN(sqfeet)) {
-                resultDiv.innerHTML = '<div class="result error">Please enter a valid number</div>';
-                return;
-            }
-            
-            const acres = sqfeet / 43560;
-            resultDiv.innerHTML = `<div class="result">${sqfeet} sq ft = ${acres.toFixed(6)} acres</div>`;
-        }
-
-        // Currency converter
-        function convertCurrency() {
-            const amount = parseFloat(document.getElementById('amount').value);
-            const from = document.getElementById('fromCurrency').value;
-            const to = document.getElementById('toCurrency').value;
-            const resultDiv = document.getElementById('currencyResult');
-            
-            if (isNaN(amount)) {
-                resultDiv.innerHTML = '<div class="result error">Please enter a valid amount</div>';
-                return;
-            }
-            
-            const rates = {
-                'USD': { 'EUR': 0.85, 'GBP': 0.73 },
-                'EUR': { 'USD': 1.18, 'GBP': 0.86 },
-                'GBP': { 'USD': 1.37, 'EUR': 1.16 }
-            };
-            
-            if (from === to) {
-                resultDiv.innerHTML = `<div class="result">${amount} ${from}</div>`;
-                return;
-            }
-            
-            const rate = rates[from][to];
-            const converted = (amount * rate).toFixed(2);
-            resultDiv.innerHTML = `<div class="result">${amount} ${from} = ${converted} ${to}</div>`;
-        }
-
-        // Basic math calculator (no external dependencies)
-        function calculateBasicMath() {
+        let installChecks = 0;
+        
+        // Calculator function
+        function calculate() {
             const num1 = parseFloat(document.getElementById('num1').value);
             const num2 = parseFloat(document.getElementById('num2').value);
             const operation = document.getElementById('operation').value;
-            const resultDiv = document.getElementById('mathResult');
+            const resultDiv = document.getElementById('result');
             
             if (isNaN(num1) || isNaN(num2)) {
-                resultDiv.innerHTML = '<div class="result error">Please enter valid numbers</div>';
+                resultDiv.innerHTML = '<div class="result" style="border-left-color: #dc3545;">Please enter valid numbers</div>';
                 return;
             }
             
@@ -408,139 +144,136 @@
                 case '*': result = num1 * num2; break;
                 case '/': 
                     if (num2 === 0) {
-                        resultDiv.innerHTML = '<div class="result error">Cannot divide by zero</div>';
+                        resultDiv.innerHTML = '<div class="result" style="border-left-color: #dc3545;">Cannot divide by zero</div>';
                         return;
                     }
                     result = num1 / num2; 
                     break;
-                case '**': result = Math.pow(num1, num2); break;
-                default: result = 'Invalid operation';
             }
             
-            resultDiv.innerHTML = `<div class="result">${num1} ${operation === '**' ? '^' : operation} ${num2} = ${result}</div>`;
+            resultDiv.innerHTML = `<div class="result">${num1} ${operation} ${num2} = ${result}</div>`;
         }
-
-        // Enhanced PWA Installation
-        window.addEventListener('beforeinstallprompt', (e) => {
-            console.log('🎉 beforeinstallprompt event fired!');
-            e.preventDefault();
-            deferredPrompt = e;
+        
+        // PWA Status Check
+        function updatePWAStatus() {
+            const statusDiv = document.getElementById('pwaStatus');
+            let status = [];
             
-            // Show install prompt immediately for debugging
-            setTimeout(() => {
-                document.getElementById('installPrompt').style.display = 'block';
-                runDiagnostics(); // Update diagnostics
-            }, 2000);
-        });
-
-        function forceInstall() {
+            // Check HTTPS
+            if (location.protocol === 'https:' || location.hostname === 'localhost') {
+                status.push('<div class="status success">✅ HTTPS: Secure</div>');
+            } else {
+                status.push('<div class="status error">❌ HTTPS: Required</div>');
+            }
+            
+            // Check Service Worker
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(registrations => {
+                    if (registrations.length > 0) {
+                        status.push('<div class="status success">✅ Service Worker: Active</div>');
+                    } else {
+                        status.push('<div class="status warning">⚠️ Service Worker: Registering...</div>');
+                    }
+                    statusDiv.innerHTML = status.join('');
+                });
+            } else {
+                status.push('<div class="status error">❌ Service Worker: Not supported</div>');
+            }
+            
+            // Check beforeinstallprompt
+            if (deferredPrompt) {
+                status.push('<div class="status success">✅ Install Prompt: Ready!</div>');
+                document.getElementById('installBtn').style.display = 'block';
+                document.getElementById('installStatus').innerHTML = '🎉 Ready to install!';
+            } else {
+                status.push('<div class="status warning">⏳ Install Prompt: Waiting...</div>');
+            }
+            
+            statusDiv.innerHTML = status.join('');
+        }
+        
+        // Install App Function
+        function installApp() {
             if (deferredPrompt) {
                 deferredPrompt.prompt();
                 deferredPrompt.userChoice.then((choiceResult) => {
-                    console.log('Installation choice:', choiceResult.outcome);
+                    console.log('Install result:', choiceResult.outcome);
                     if (choiceResult.outcome === 'accepted') {
-                        console.log('PWA installation accepted');
+                        document.getElementById('installStatus').innerHTML = '✅ App installed successfully!';
+                    } else {
+                        document.getElementById('installStatus').innerHTML = '❌ Installation cancelled';
                     }
                     deferredPrompt = null;
-                    runDiagnostics();
+                    updatePWAStatus();
                 });
-            } else {
-                alert('Install prompt not available. Try adding to home screen manually via browser menu.');
             }
         }
-
-        function installPWA() {
-            forceInstall();
-            hideInstallPrompt();
-        }
-
-        function hideInstallPrompt() {
-            document.getElementById('installPrompt').style.display = 'none';
-        }
-
-        // Simplified, working Service Worker
-        const swCode = `
-console.log('Service Worker: Starting...');
-
-const CACHE_NAME = 'pwa-calc-v1';
-const urlsToCache = ['./'];
-
-self.addEventListener('install', event => {
-  console.log('Service Worker: Install event');
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-        console.log('Service Worker: Caching app shell');
-        return cache.addAll(urlsToCache);
-      })
-  );
-  self.skipWaiting();
-});
-
-self.addEventListener('activate', event => {
-  console.log('Service Worker: Activate event');
-  event.waitUntil(self.clients.claim());
-});
-
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        if (response) {
-          console.log('Service Worker: Serving from cache');
-          return response;
-        }
-        return fetch(event.request);
-      }
-    )
-  );
-});
-        `;
-
+        
+        // Listen for beforeinstallprompt
+        window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('🎉 beforeinstallprompt fired!');
+            e.preventDefault();
+            deferredPrompt = e;
+            updatePWAStatus();
+        });
+        
         // Register Service Worker
         if ('serviceWorker' in navigator) {
+            const swCode = `
+                const CACHE_NAME = 'calc-pwa-v1';
+                const urlsToCache = ['./'];
+                
+                self.addEventListener('install', event => {
+                    event.waitUntil(
+                        caches.open(CACHE_NAME)
+                            .then(cache => cache.addAll(urlsToCache))
+                    );
+                    self.skipWaiting();
+                });
+                
+                self.addEventListener('activate', event => {
+                    event.waitUntil(self.clients.claim());
+                });
+                
+                self.addEventListener('fetch', event => {
+                    event.respondWith(
+                        caches.match(event.request)
+                            .then(response => response || fetch(event.request))
+                    );
+                });
+            `;
+            
             const blob = new Blob([swCode], { type: 'application/javascript' });
             const swUrl = URL.createObjectURL(blob);
             
             navigator.serviceWorker.register(swUrl)
                 .then(registration => {
-                    console.log('✅ Service Worker registered successfully');
-                    runDiagnostics();
+                    console.log('✅ SW registered');
+                    updatePWAStatus();
                 })
                 .catch(error => {
-                    console.log('❌ Service Worker registration failed:', error);
-                    runDiagnostics();
+                    console.log('❌ SW failed:', error);
+                    updatePWAStatus();
                 });
         }
-
-        // Run initial diagnostics
-        setTimeout(runDiagnostics, 1000);
-
-        // Check for installation every few seconds
-        setInterval(() => {
-            installAttempts++;
-            if (installAttempts < 10) { // Only check for first 50 seconds
-                runDiagnostics();
-            }
-        }, 5000);
-
-        // iOS detection and instructions
-        function isIOS() {
-            return /iPad|iPhone|iPod/.test(navigator.userAgent);
-        }
-
-        if (isIOS()) {
-            setTimeout(() => {
-                const iosInstructions = document.createElement('div');
-                iosInstructions.className = 'install-prompt';
-                iosInstructions.style.display = 'block';
-                iosInstructions.innerHTML = `
-                    📱 iOS: Tap Share (↗️) → "Add to Home Screen"
-                    <button class="install-btn" onclick="this.parentElement.remove()">Got it</button>
+        
+        // Check install status periodically
+        function checkInstallStatus() {
+            installChecks++;
+            updatePWAStatus();
+            
+            if (installChecks < 20 && !deferredPrompt) {
+                setTimeout(checkInstallStatus, 2000);
+            } else if (!deferredPrompt) {
+                document.getElementById('installStatus').innerHTML = `
+                    ❌ Install prompt not triggered<br>
+                    <small>Try: Chrome menu → "Add to Home Screen"</small>
                 `;
-                document.body.appendChild(iosInstructions);
-            }, 3000);
+            }
         }
+        
+        // Start checking
+        setTimeout(checkInstallStatus, 1000);
     </script>
 </body>
 </html>
