@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Calculator PWA</title>
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlB5dGhvbiBDYWxjdWxhdG9yIiwKICAic2hvcnRfbmFtZSI6ICJQeUNhbGMiLAogICJzdGFydF91cmwiOiAiLyIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzJlM2Q0ZCIsCiAgInRoZW1lX2NvbG9yIjogIiMyZTNkNGQiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSFpwWlhkQ2IzZzlJakFnTUNBNU5pQTVOaUlnWm1sc2JEMGlJek0xT1RJMk55SStQR05wY21Oc1pTQmplRDBpTkRnaUlHTjVQU0kwT0NJZ2NqMGlNemNpSUdacGJHeDBjajBpZEhKMVpTSStQQzlqYVhKamJHVStQR3g4YTJndFoyeDVjR2dnZUQxSlRUTTJMakk1YXpVdU1EZ3VOREIwTnk0MFRTNDBNVGN0TVM0eE1qZzJMemd0TWpRdE1UZ3hkaklnWkdGMFlTMXViR0Z1WjNWaFoyVTlRM0lpSUdScGRHRmphR1Z5TFRWdGJYTm5hV1E5SWs1RldrODBVSFY2Zg0=PSI+PC9nPjwvc3ZnPg==IiwKICAgICAgInNpemVzIjogIjk2eDk2IiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIKICAgIH0KICBdCn0=">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(45deg, #2e3d4d, #4a5568);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            padding: 20px;
+            background: #f7fafc;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            background: #4299e1;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: #3182ce;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(66, 153, 225, 0.3);
+        }
+
+        .calculator {
+            padding: 30px;
+            display: none;
+        }
+
+        .calculator.active {
+            display: block;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #4299e1;
+        }
+
+        button {
+            background: linear-gradient(45deg, #48bb78, #38a169);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin: 5px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0fff4;
+            border-left: 4px solid #48bb78;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .error {
+            background: #fed7d7;
+            border-left-color: #e53e3e;
+            color: #c53030;
+        }
+
+        .code-editor {
+            margin-top: 20px;
+        }
+
+        #customCode {
+            font-family: 'Courier New', monospace;
+            height: 200px;
+            resize: vertical;
+        }
+
+        .install-prompt {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #2d3748;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            display: none;
+            z-index: 1000;
+        }
+
+        .install-btn {
+            background: #4299e1;
+            margin-left: 10px;
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+                border-radius: 8px;
+            }
+            
+            .nav {
+                padding: 15px;
+            }
+            
+            .nav-btn {
+                font-size: 12px;
+                padding: 8px 16px;
+            }
+            
+            .calculator {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐍 Python Calculator PWA</h1>
+            <p>Portable calculators with Python power</p>
+        </div>
+        
+        <div class="nav">
+            <button class="nav-btn active" onclick="showCalculator('area')">Area Converter</button>
+            <button class="nav-btn" onclick="showCalculator('currency')">Currency Converter</button>
+            <button class="nav-btn" onclick="showCalculator('math')">Math Calculator</button>
+            <button class="nav-btn" onclick="showCalculator('custom')">Custom Code</button>
+        </div>
+
+        <!-- Area Converter -->
+        <div id="area" class="calculator active">
+            <h2>Area Converter</h2>
+            <div class="input-group">
+                <label for="sqfeet">Square Feet:</label>
+                <input type="number" id="sqfeet" placeholder="Enter square feet" step="any">
+            </div>
+            <button onclick="convertArea()">Convert to Acres</button>
+            <div id="areaResult"></div>
+        </div>
+
+        <!-- Currency Converter -->
+        <div id="currency" class="calculator">
+            <h2>Currency Converter</h2>
+            <div class="input-group">
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" placeholder="Enter amount" step="any">
+            </div>
+            <div class="input-group">
+                <label for="fromCurrency">From:</label>
+                <select id="fromCurrency">
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="GBP">GBP</option>
+                    <option value="JPY">JPY</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="toCurrency">To:</label>
+                <select id="toCurrency">
+                    <option value="EUR">EUR</option>
+                    <option value="USD">USD</option>
+                    <option value="GBP">GBP</option>
+                    <option value="JPY">JPY</option>
+                </select>
+            </div>
+            <button onclick="convertCurrency()">Convert</button>
+            <div id="currencyResult"></div>
+        </div>
+
+        <!-- Math Calculator -->
+        <div id="math" class="calculator">
+            <h2>Advanced Math Calculator</h2>
+            <div class="input-group">
+                <label for="expression">Python Expression:</label>
+                <input type="text" id="expression" placeholder="e.g., sqrt(16) + pow(2, 3)" value="sqrt(16) + pow(2, 3)">
+            </div>
+            <button onclick="calculateMath()">Calculate</button>
+            <div id="mathResult"></div>
+        </div>
+
+        <!-- Custom Code -->
+        <div id="custom" class="calculator">
+            <h2>Custom Python Code</h2>
+            <div class="input-group">
+                <label for="customCode">Python Code:</label>
+                <textarea id="customCode" placeholder="Write your Python code here...">
+# Example: Temperature conversion
+celsius = 25
+fahrenheit = celsius * 9/5 + 32
+print(f"{celsius}°C = {fahrenheit}°F")
+
+# Example: List operations
+numbers = [1, 2, 3, 4, 5]
+squared = [x**2 for x in numbers]
+print(f"Original: {numbers}")
+print(f"Squared: {squared}")
+                </textarea>
+            </div>
+            <button onclick="runCustomCode()">Run Code</button>
+            <div id="customResult"></div>
+        </div>
+    </div>
+
+    <div class="install-prompt" id="installPrompt">
+        Install this app for easy access!
+        <button class="install-btn" onclick="installPWA()">Install</button>
+        <button class="install-btn" onclick="hideInstallPrompt()">Later</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+    <script>
+        let pyodide = null;
+        let deferredPrompt = null;
+
+        // Initialize Pyodide
+        async function initPyodide() {
+            if (!pyodide) {
+                try {
+                    pyodide = await loadPyodide();
+                    console.log("Pyodide loaded successfully");
+                } catch (error) {
+                    console.error("Failed to load Pyodide:", error);
+                }
+            }
+            return pyodide;
+        }
+
+        // Initialize on load
+        initPyodide();
+
+        // Calculator switching
+        function showCalculator(calcId) {
+            // Hide all calculators
+            document.querySelectorAll('.calculator').forEach(calc => {
+                calc.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected calculator
+            document.getElementById(calcId).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Area converter
+        function convertArea() {
+            const sqfeet = parseFloat(document.getElementById('sqfeet').value);
+            const resultDiv = document.getElementById('areaResult');
+            
+            if (isNaN(sqfeet)) {
+                resultDiv.innerHTML = '<div class="result error">Please enter a valid number</div>';
+                return;
+            }
+            
+            const acres = sqfeet / 43560;
+            resultDiv.innerHTML = `<div class="result">${sqfeet} sq ft = ${acres.toFixed(6)} acres</div>`;
+        }
+
+        // Currency converter (mock rates for demo)
+        async function convertCurrency() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            const from = document.getElementById('fromCurrency').value;
+            const to = document.getElementById('toCurrency').value;
+            const resultDiv = document.getElementById('currencyResult');
+            
+            if (isNaN(amount)) {
+                resultDiv.innerHTML = '<div class="result error">Please enter a valid amount</div>';
+                return;
+            }
+            
+            // Mock exchange rates (in real app, you'd fetch from an API)
+            const rates = {
+                'USD': { 'EUR': 0.85, 'GBP': 0.73, 'JPY': 110 },
+                'EUR': { 'USD': 1.18, 'GBP': 0.86, 'JPY': 129 },
+                'GBP': { 'USD': 1.37, 'EUR': 1.16, 'JPY': 150 },
+                'JPY': { 'USD': 0.0091, 'EUR': 0.0078, 'GBP': 0.0067 }
+            };
+            
+            if (from === to) {
+                resultDiv.innerHTML = `<div class="result">${amount} ${from}</div>`;
+                return;
+            }
+            
+            const rate = rates[from][to];
+            const converted = (amount * rate).toFixed(2);
+            resultDiv.innerHTML = `<div class="result">${amount} ${from} = ${converted} ${to}</div>`;
+        }
+
+        // Math calculator using Pyodide
+        async function calculateMath() {
+            const expression = document.getElementById('expression').value;
+            const resultDiv = document.getElementById('mathResult');
+            
+            if (!expression.trim()) {
+                resultDiv.innerHTML = '<div class="result error">Please enter an expression</div>';
+                return;
+            }
+            
+            try {
+                await initPyodide();
+                const result = pyodide.runPython(`
+import math
+from math import *
+result = ${expression}
+result
+                `);
+                resultDiv.innerHTML = `<div class="result">${expression} = ${result}</div>`;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="result error">Error: ${error.message}</div>`;
+            }
+        }
+
+        // Custom code runner
+        async function runCustomCode() {
+            const code = document.getElementById('customCode').value;
+            const resultDiv = document.getElementById('customResult');
+            
+            if (!code.trim()) {
+                resultDiv.innerHTML = '<div class="result error">Please enter some Python code</div>';
+                return;
+            }
+            
+            try {
+                await initPyodide();
+                
+                // Capture print output
+                pyodide.runPython(`
+import sys
+from io import StringIO
+sys.stdout = StringIO()
+                `);
+                
+                // Run user code
+                pyodide.runPython(code);
+                
+                // Get output
+                const output = pyodide.runPython('sys.stdout.getvalue()');
+                
+                resultDiv.innerHTML = `<div class="result"><pre>${output || 'Code executed successfully (no output)'}</pre></div>`;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="result error">Error: ${error.message}</div>`;
+            }
+        }
+
+        // PWA Installation
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('installPrompt').style.display = 'block';
+        });
+
+        function installPWA() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    deferredPrompt = null;
+                    hideInstallPrompt();
+                });
+            }
+        }
+
+        function hideInstallPrompt() {
+            document.getElementById('installPrompt').style.display = 'none';
+        }
+
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('data:text/javascript;base64,Y29uc3QgQ0FDSEVfTkFNRSA9ICdweXRob24tY2FsY3VsYXRvci12MSc7CmNvbnN0IHVybHNUb0NhY2hlID0gWwogICcvJywKICAnaHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L3B5b2RpZGUvdjAuMjQuMS9mdWxsL3B5b2RpZGUuanMnCl07CgpzZWxmLmFkZEV2ZW50TGlzdGVuZXIoJ2luc3RhbGwnLCBldmVudCA9PiB7CiAgZXZlbnQud2FpdFVudGlsKAogICAgY2FjaGVzLm9wZW4oQ0FDSEVfTkFNRSkKICAgICAgLnRoZW4oY2FjaGUgPT4gY2FjaGUuYWRkQWxsKHVybHNUb0NhY2hlKSkKICApOwp9KTsKCnNlbGYuYWRkRXZlbnRMaXN0ZW5lcignZmV0Y2gnLCBldmVudCA9PiB7CiAgZXZlbnQucmVzcG9uZFdpdGgoCiAgICBjYWNoZXMubWF0Y2goZXZlbnQucmVxdWVzdCkKICAgICAgLnRoZW4ocmVzcG9uc2UgPT4gewogICAgICAgIHJldHVybiByZXNwb25zZSB8fCBmZXRjaChldmVudC5yZXF1ZXN0KTsKICAgICAgfSkKICApOwp9KTs=')
+                .then(() => console.log('Service Worker registered'));
+        }
+
+        // Save state to localStorage for persistence
+        function saveCalculatorState() {
+            const state = {
+                sqfeet: document.getElementById('sqfeet').value,
+                amount: document.getElementById('amount').value,
+                expression: document.getElementById('expression').value,
+                customCode: document.getElementById('customCode').value
+            };
+            localStorage.setItem('calculatorState', JSON.stringify(state));
+        }
+
+        function loadCalculatorState() {
+            const saved = localStorage.getItem('calculatorState');
+            if (saved) {
+                const state = JSON.parse(saved);
+                if (state.sqfeet) document.getElementById('sqfeet').value = state.sqfeet;
+                if (state.amount) document.getElementById('amount').value = state.amount;
+                if (state.expression) document.getElementById('expression').value = state.expression;
+                if (state.customCode) document.getElementById('customCode').value = state.customCode;
+            }
+        }
+
+        // Auto-save on input changes
+        document.addEventListener('input', saveCalculatorState);
+        
+        // Load saved state on startup
+        window.addEventListener('load', loadCalculatorState);
+    </script>
+</body>
+</html>
