@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Python Calculator PWA</title>
     
-    <!-- PWA Manifest with proper calculator icon -->
-    <link rel="manifest" href="data:application/json;charset=utf-8;base64,ewogICJuYW1lIjogIlB5dGhvbiBDYWxjdWxhdG9yIiwKICAic2hvcnRfbmFtZSI6ICJQeUNhbGMiLAogICJkZXNjcmlwdGlvbiI6ICJQb3J0YWJsZSBQeXRob24gY2FsY3VsYXRvcnMgZm9yIGV2ZXJ5ZGF5IHVzZSIsCiAgInN0YXJ0X3VybCI6ICIuLyIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzJlM2Q0ZCIsCiAgInRoZW1lX2NvbG9yIjogIiM0Mjk5ZTEiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQUhBQUFBQndDQVlBQUFEeGNRLzFBQUFBQjNOSlRVVUhCeVF5Rnc0Rm80VExHQTlRb1dCa3hCZ3BOV1V3SmpHU21NVUJGUHF6Ykd5U0VBc01Wc1lBT3NYQnhhQWVUUlNxbTVIUVFBQmtRTFFBUStaQW5Dc293a1JmNHVObzJQeGY3Z2tGS0FqUzE0WHBMSm1MalF4Tk9YV1JPQkxmOW5VZlVYKzY2L0F3VkZBS1VEa3g3VmVybDZCdjJKM3BXY3l3R01VUURkNWY4d0FSSE1oQzJVbDBsa0JPaG12b2VsSklFc0NGQkFuS0Q5Zmh3WjUzUXFxVEVBQUJJZEpaQUJ1ZHU0b3ZNUFNRSGJka01TQlUzT1Y3TmhlbFFlRGJKY0hCNFVMdHg5QjZEZ2Z2TlJLWmExdGZDSWFmVE9jQWZseFFKNjZub3VqWnVXMnJ3TnhpdUJSQWpkNGZKZXZORHFmNmE2T1o2MmRqbG1nR2pOMVhqWjJaQ1dLVGNYL3FBYWFJQTJnLzFwTVZSSjI3emZ2R0FlVzJVNXdRaUJJT3EwU1l0MUtHdGNuT1hUNFVLdkl0WkRpQ2pUNlU3STNhdjJOK0d6TEF3Yjc4UGZNNElOejEyL3FJMGlqUDVXSFdKZEpUZm51RXZsaHQ4TVk5Q0lvUXJCZllwbFdqS2dDYWlUeUh1UjNWcFYraVNBMXQ2M2xEckNEbWJCTlFmL3pkdjZYVzZta1RGYUJmZ1MwMVhxaVlTTjBFeWI3dmlpT200dzZSZVJUK0ZUaVJEWjdmSTlUUk9kZkpEV1hBVXdMclB4UzNvZ0VoZGJOUW1lU0lLUndDUDczSDd0Q0t6VGFabzF3RTJ0UUpRaWFFcExoRXVIM2t4SWxvTGNpZU9qZ1dQdUJIQ2dqN2VDS3liQnVRS1ZKWUNBUUFMQUJJNDZ1cGdyNDJzOFBOUDJiTm1LZlBHd2N6a0FTNWpHa1k1RCtBOFZ1OCtUSXZEd29OV3kzWjdWWHVZeU9YQ0l2aXNSTUlmVGZNbGJveUl0T2VGT0dxQkxoWm1OVkN3SllIVGpRQklhRUJYdDNLTXJRQ0Nvd0w3UDNUWDN4ME1nWGsyVE5ORkJEV0E5emxUWWFVK09VTGdHNElYVGNOTThIR1V3MHljVG9pOE82dnZKQVV0dWZCMmdNMU9OMEhSazVtN2J2emt5anVrbE95Smhxd0NMbVNNNDVxNlBUaXUzVjhIa0FJYVpxOEFRSG5jVjkwd3FsUE53WUJrSmY4TEZOQzdLVWNtRUs0MEtuNHJwVkhURUpqZktVSlZIU3kyTERwcktNN0tzQWlSQUVBREcrVVZWZkZocGNQQXMxeHE0Y3JyVkNpYmVDNW9GaXUxa0dnZlZYdkEyUE5OQUNKVWdYQkNGMFNlUllLZiswSkJCZ2pyWElqYW9nOGV2YnU3dElwVkxuWHRYbW9rSXZKdzhpZEVKL3Rua1UvZ0dCQkZ4S3U4bkJLVi9oKzhmNE9WU0VDSkFqWVdIWkc5UlFTdGM1YnVGcFg3cWU0aVp6RWowTnhWTVFQWDI0ZGhzUWJrN0xGK0JVc0MwanpBaDN6azJZS1NKK1EvZk0xSENHcE9lcmp1TzRob0xScU5PdjVBZldRdFJ2amtLQUZFakNNZkw4Q3BOcWNHMGVjPSIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQUhBQUFBQndDQVlBQUFEeGNRLzFBQUFBQjNOSlRVVUhCeVF5Rnc0Rm80VExHQTlRb1dCa3hCZ3BOV1V3SmpHU21NVUJGUHF6Ykd5U0VBc01Wc1lBT3NYQnhhQWVUUlNxbTVIUVFBQmtRTFFBUStaQW5Db293a1JmNHVObzJQeGY3Z2tGS0FqUzE0WHBMSm1MalF4Tk9YV1JPQkxmOW5VZlVYKzY2L0F3VkZBS1VEa3g3VmVybDZCdjJKM3BXY3l3R01VUURkNWY4d0FSSE1oQzJVbDBsa0JPaG12b2VsSklFc0NGQkFuS0Q5Zmh3WjUzUXFxVEVBQUJJZEpaQUJ1ZHU0b3ZNUFNRSGJka01TQlUzT1Y3TmhlbFFlRGJKY0hCNFVMdHg5QjZEZ2Z2TlJLWmExdGZDSWFmVE9jQWZseFFKNjZub3VqWnVXMnJ3TnhpdUJSQWpkNGZKZXZORHFmNmE2T1o2MmRqbG1nR2pOMVhqWjJaQ1dLVGNYL3FBYWFJQTJnLzFwTVZSSjI3emZ2R0FlVzJVNXdRaUJJT3EwU1l0MUtHdGNuT1hUNFVLdkl0WkRpQ2pUNlU3STNhdjJOK0d6TEF3Yjc4UGZNNElOejEyL3FJMGlqUDVXSFdKZEpUZm51RXZsaHQ4TVk5Q0lvUXJCZllwbFdqS2dDYWlUeUh1UjNWcFYraVNBMXQ2M2xEckNEbWJCTlFmL3pkdjZYVzZta1RGYUJmZ1MwMVhxaVlTTjBFeWI3dmlpT200dzZSZVJUK0ZUaVJEWjdmSTlUUk9kZkpEV1hBVXdMclB4UzNvZ0VoZGJOUW1lU0lLUndDUDczSDd0Q0t6VGFabzF3RTJ0UUpRaWFFcExoRXVIM2t4SWxvTGNpZU9qZ1dQdUJIQ2dqN2VDS3liQnVRS1ZKWUNBUUFMQUJJNDZ1cGdyNDJzOFBOUDJiTm1LZlBHd2N6a0FTNWpHa1k1RCtBOFZ1OCtUSXZEd29OV3kzWjdWWHVZeU9YQ0l2aXNSTUlmVGZNbGJveUl0T2VGT0dxQkxoWm1OVkN3SllIVGpRQklhRUJYdDNLTXJRQ0Nvd0w3UDNUWDN4ME1nWGsyVE5ORkJEV0E5emxUWWFVK09VTGdHNElYVGNOTThIR1V3MHljVG9pOE82dnZKQVV0dWZCMmdNMU9OMEhSazVtN2J2emt5anVrbE95Smhxd0NMbVNNNDVxNlBUaXUzVjhIa0FJYVpxOEFRSG5jVjkwd3FsUE53WUJrSmY4TEZOQzdLVWNtRUs0MEtuNHJwVkhURUpqZktVSlZIU3kyTERwcktNN0tzQWlSQUVBREcrVVZWZkZocGNQQXMxeHE0Y3JyVkNpYmVDNW9GaXUxa0dnZlZYdkEyUE5OQUNKVWdYQkNGMFNlUllLZiswSkJCZ2pyWElqYW9nOGV2YnU3dElwVkxuWHRYbW9rSXZKdzhpZEVKL3Rua1UvZ0dCQkZ4S3U4bkJLVi9oKzhmNE9WU0VDSkFqWVdIWkc5UlFTdGM1YnVGcFg3cWU0aVp6RWowTnhWTVFQWDI0ZGhzUWJrN0xGK0JVc0MwanpBaDN6azJZS1NKK1EvZk0xSENHcE9lcmp1TzRob0xScU5PdjVBZldRdFJ2amtLQUZFakNNZkw4Q3BOcWNHMGVjPSIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfQogIF0sCiAgImNhdGVnb3JpZXMiOiBbInV0aWxpdGllcyIsICJlZHVjYXRpb24iLCAicHJvZHVjdGl2aXR5Il0sCiAgImxhbmciOiAiZW4iLAogICJkaXIiOiAibHRyIgp9">
+    <!-- Fixed PWA Manifest - Key changes for installability -->
+    <link rel="manifest" href="data:application/json;charset=utf-8;base64,ewogICJuYW1lIjogIlB5dGhvbiBDYWxjdWxhdG9yIiwKICAic2hvcnRfbmFtZSI6ICJQeUNhbGMiLAogICJkZXNjcmlwdGlvbiI6ICJQb3J0YWJsZSBQeXRob24gY2FsY3VsYXRvcnMgZm9yIGV2ZXJ5ZGF5IHVzZSIsCiAgInN0YXJ0X3VybCI6ICIuLyIsCiAgInNjb3BlIjogIi4vIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjMmUzZDRkIiwKICAidGhlbWVfY29sb3IiOiAiIzQyOTllMSIsCiAgIm9yaWVudGF0aW9uIjogImFueSIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBSEFBQUFCd0NBWUFBQUR4Y1EvMUFBQUFnVVRZeTVBQUFBQUJKUlU1RXJrSmdnZz09IiwKICAgICAgInNpemVzIjogIjE5MngxOTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciLAogICAgICAicHVycG9zZSI6ICJhbnkgbWFza2FibGUiCiAgICB9LAogICAgewogICAgICAic3JjIjogImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBUUFBQUFFQUNBWUFBQUROWlhGUEFBQUFJSUVsRVFWUjRBZTJjQzAwVGtWV3JYZW5qWTB4UTgwUWI0K05lRGw4eGdCQjNSbjNQZFlFa0pRQlZLd1ljS0R0ZWlVUnV5QlNOdmRZMXhGcDBBY0dKaHp5NEJrYm1yVGdZOW5LYUNyallrcmpxYjJaNWJ5ajNyWnJxRU0xVE5aR2s5MXloYkd1TzBacTB6dU9vcHlGTGxxZjVIeHYrUW5hWHNQcytrWE10aE41bXJnS3RkZjM0YnMvaU8zaUNnMmV2ekw0TmpOWmw3Mlo5VHF6V0d3dSswSkFKQUd6VFlOZGxKNVYrRzBOSGtxUERBMFBuYWdnMURjdEQxZXcxQjF4N05JOHFRNnRmQVdNSWs2TjNPVk9maGI5cUhzRmxWanE4RGEwNmR2TUZybGQ0b2l6RWF0VVB0QjBlOTVwVFJra0xhQklBSTY4Q0xZdnIzZVVOL3ZEZDBka3pWYTFIeFZEcWdVNFV3aVRJcDlBcGN0WElYOGZKZXh2akYwa1hrSDhmUTN0cHBNVDJJVHhvQVE4TnM2RzFyeGhJSC9BZzNBVFhJNW5ZYVhNd0lLODM4aWUrL1VEaEw4WUpJNElBS0JlQVFFRkNlVy9BZ1FCK1VraXdCZ1BBRG5RQllhdG1IdXZQc3hPLzZGc3ZjaFY0em1wcVpKOUFOY0NsNzhOdEl6WEZnZ0VnU0FCenVIcW02Z1VTcllObDJhYk1MbVdGZGFKVyt2ekZsMDJYQTRJQWREbjBveVFHc3RaWWg0emVQTm1NaE1ScEFWOXJ1N1VWWGhsMXNoZDVKbXB0Wm9PQXZHMzFmcS9qSzUzZlpGaWpZREpBVERGSzFCSFpqQWlrN2psUjhrRnZUWCtQZjEzT09JNG8ybHZ1SHFOdkVCOWZnTG5lbjdZajJ0ZHJkcWZFVUNidXNOdTNLT3FuMDNicWdFUWZRV2JCWGwwSzVUK0ZUaEdQdWRMZlQ1dW5sUTFNNlBySUVHM2tHZGE3dFhNalVuaWVUeFJWdlpyZVhqRjNhZG54NFczNFdLUUlKK3lRUUJJN21YZzd4Mkp5bGhVdXFGMGIvR3g4aXhGRGNrK2hSYUpCM3hJaU5pdVdLSFdBWjlqWXYrNTg1NXlKRTZrMTNPOWNGZDZySWNqS3dDZWRJQUFBSmtvOE5rQzNlVTNPRG1aWXNFNzFibHlWZWFUMkxzY2hYSFJHV1VudGdEUTN4ZlYrekNzUEp3MHpEdUFGUkRRN3JPN0tNMUcxcnJEbVZHNEhBSGFhTCtBUkE4Q0hxMWloOWtrNnRaclBCZm5KZm9KWTFudXVybUZJOWJxNjVqUXdZNS90Sng5cXFpNjI4RzhLVGxEclpJRWkyQ3YzbWl5dzNVZVFKZXZLMjZnMk1aaVpnUnF2MFBDZ1FZZm1Ja0VJVWtjQXlEOGRjZkJNSTRqRHBJQndGS1VjUUNrU1J6NlQraVREWTYwMFVnOE1tT3dKUDd4V3NvU0pKMERHUmlBRE9KYkVseTdtOWJSQWVPZkVlNjFPUEF3QUNhSUJCSFE9IiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciLAogICAgICAicHVycG9zZSI6ICJhbnkgbWFza2FibGUiCiAgICB9CiAgXQp9">
     
     <!-- Apple-specific PWA meta tags -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="PyCalc">
-    <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHAAAABwCAYAAADxcQ/1AAAAB3NJTUUHByQyFw4Fo4TLGA9QoWBkxBgpNWUwJjGSmMUBFPqzbGySEAsMVsYAOsXBxaAeTRSqm5HQQABkQTQAQ+ZAnCowkRf4uNo2Pxf7gkFKAjS14XpLJmLjQxNOXWROBLf9nUfUX+66/AwVFAKUDkx7Verl6Bv2J3pWcywGMUQDd5f8wARHMhC2Ul0lkBOhmvoelJIEsCFBAnKD9fhwZ53QqqTEAABIdJZABudu4ovMPSQHbdkMSBU3OV7NhelQeDbJcHB4ULtx9B6DgfvNRKZa1tfCIafTOcAflxQJ66noujZuW2rwNxiuBRAjd4fJevNDqf6a6OZ62djlmgGjN1XjZ2ZCWKTcX/qAaaIA2g/1pMVRJ27zfvGAeW2U5wQiBIOq0SYt1KGtcnOXT4UKvItZDiCjT6U7I3av2N+GzLAwb78PfM4INz12/qI0ijP5WHWJdJTfnuEvlht8MY9CIoQrBfYplWjKgCaiTyHuR3VpV+iSA1t63lDrCDmbBNQf/zdv6XW6mkTFaBfgS01XqiYSN0Eyb7viiOm4w6ReRT+FTiRDZ7fI9TROdfJDWXAUwLrPxS3ogEhdbNQmeSIKRwCP73H7tCKzTaZo1wE2tQJQiakpLhEuH3kxIloLcieOjgWPuBHCgj7eCKybBuQKVJYCAALABI46upgr42s8PNP2bNmKfPGwczkAS5jGkY5D+A8Vu8+TIvDwoNWy3Z7VXuYyOXCIvisRMIfTfMlboyItOeFOGqBLhZmNVCwJYHTjQBIaEBXt3KMrQCCowL7P3TX3x0MgXk2TNEFBDWA9zlTYaU+OULgG4IXTcNM8HGUw0ycToi8O6vvJAUtufB2gM1ON0HRk5m7bvzkyjuklOyJhqwCLmSM45q6PTiu3V8HkAIaZq8AQHncV90wqlPNwYBkJf8LFNC7KUcmEK40Kn4rpVHTEJjfKUJVHSy2LDprKM7KsAiRAEADG+UVVfFhpcPAs1xq4crrVCibeC5oFiu1kGgfVXvA2PNNACJUgXBCF0SeRYKf+0JBBgjrXIjaog8evbu7tIpVLnXtXmokIvJw8idEJ/tnkU/gGBBFxKu8nBKV/h+8f4OVSECJAjYWHZG9RQStc5buFpX7qe4iZzEj0NxVMQPX24dhsQbk7LF+BUsC0jzAh3zk2YKSJ+Q/fM1HCGpOerjuO4hoLRqNOv5AfWQtRvjkKAFEjCMfL8CpNqcG0ec=">
     
     <style>
         * {
@@ -43,6 +42,23 @@
             padding: 20px;
             text-align: center;
         }
+
+        .diagnostic {
+            background: #e2e8f0;
+            padding: 15px;
+            border-bottom: 1px solid #cbd5e0;
+        }
+
+        .status {
+            margin: 5px 0;
+            padding: 8px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        .status.success { background: #c6f6d5; color: #22543d; }
+        .status.warning { background: #fef5e7; color: #c05621; }
+        .status.error { background: #fed7d7; color: #c53030; }
 
         .nav {
             display: flex;
@@ -139,10 +155,6 @@
             color: #c53030;
         }
 
-        .code-editor {
-            margin-top: 20px;
-        }
-
         #customCode {
             font-family: 'Courier New', monospace;
             height: 200px;
@@ -169,39 +181,39 @@
             font-size: 14px;
         }
 
-        @media (max-width: 600px) {
-            .container {
-                margin: 10px;
-                border-radius: 8px;
-            }
-            
-            .nav {
-                padding: 15px;
-            }
-            
-            .nav-btn {
-                font-size: 12px;
-                padding: 8px 16px;
-            }
-            
-            .calculator {
-                padding: 20px;
-            }
+        .force-install {
+            background: #e53e3e;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 10px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1> Python Calculator PWA</h1>
-            <p>Portable calculators with Python power</p>
+            <h1>🧮 Python Calculator PWA</h1>
+            <p>Diagnostic & Fixed Version</p>
+        </div>
+        
+        <!-- PWA Diagnostic Section -->
+        <div class="diagnostic">
+            <h3>🔍 PWA Installation Status</h3>
+            <div id="diagnosticResults">
+                <div class="status warning">⏳ Running diagnostics...</div>
+            </div>
+            <button class="force-install" onclick="forceInstall()" id="forceInstallBtn" style="display:none;">
+                🚀 Force Install PWA
+            </button>
         </div>
         
         <div class="nav">
             <button class="nav-btn active" onclick="showCalculator('area')">Area Converter</button>
             <button class="nav-btn" onclick="showCalculator('currency')">Currency Converter</button>
             <button class="nav-btn" onclick="showCalculator('math')">Math Calculator</button>
-            <button class="nav-btn" onclick="showCalculator('custom')">Custom Code</button>
         </div>
 
         <!-- Area Converter -->
@@ -228,7 +240,6 @@
                     <option value="USD">USD</option>
                     <option value="EUR">EUR</option>
                     <option value="GBP">GBP</option>
-                    <option value="JPY">JPY</option>
                 </select>
             </div>
             <div class="input-group">
@@ -237,7 +248,6 @@
                     <option value="EUR">EUR</option>
                     <option value="USD">USD</option>
                     <option value="GBP">GBP</option>
-                    <option value="JPY">JPY</option>
                 </select>
             </div>
             <button onclick="convertCurrency()">Convert</button>
@@ -246,81 +256,94 @@
 
         <!-- Math Calculator -->
         <div id="math" class="calculator">
-            <h2>Advanced Math Calculator</h2>
+            <h2>Basic Math Calculator</h2>
             <div class="input-group">
-                <label for="expression">Python Expression:</label>
-                <input type="text" id="expression" placeholder="e.g., sqrt(16) + pow(2, 3)" value="sqrt(16) + pow(2, 3)">
+                <label for="num1">Number 1:</label>
+                <input type="number" id="num1" placeholder="Enter first number" step="any">
             </div>
-            <button onclick="calculateMath()">Calculate</button>
+            <div class="input-group">
+                <label for="operation">Operation:</label>
+                <select id="operation">
+                    <option value="+">Addition (+)</option>
+                    <option value="-">Subtraction (-)</option>
+                    <option value="*">Multiplication (×)</option>
+                    <option value="/">Division (÷)</option>
+                    <option value="**">Power (^)</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="num2">Number 2:</label>
+                <input type="number" id="num2" placeholder="Enter second number" step="any">
+            </div>
+            <button onclick="calculateBasicMath()">Calculate</button>
             <div id="mathResult"></div>
-        </div>
-
-        <!-- Custom Code -->
-        <div id="custom" class="calculator">
-            <h2>Custom Python Code</h2>
-            <div class="input-group">
-                <label for="customCode">Python Code:</label>
-                <textarea id="customCode" placeholder="Write your Python code here...">
-# Example: Temperature conversion
-celsius = 25
-fahrenheit = celsius * 9/5 + 32
-print(f"{celsius}°C = {fahrenheit}°F")
-
-# Example: List operations
-numbers = [1, 2, 3, 4, 5]
-squared = [x**2 for x in numbers]
-print(f"Original: {numbers}")
-print(f"Squared: {squared}")
-                </textarea>
-            </div>
-            <button onclick="runCustomCode()">Run Code</button>
-            <div id="customResult"></div>
         </div>
     </div>
 
     <div class="install-prompt" id="installPrompt">
-        Install this app for easy access!
+        📱 Install this app for easy access!
         <button class="install-btn" onclick="installPWA()">Install</button>
         <button class="install-btn" onclick="hideInstallPrompt()">Later</button>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
     <script>
-        let pyodide = null;
         let deferredPrompt = null;
+        let installAttempts = 0;
 
-        // Initialize Pyodide
-        async function initPyodide() {
-            if (!pyodide) {
-                try {
-                    pyodide = await loadPyodide();
-                    console.log("Pyodide loaded successfully");
-                } catch (error) {
-                    console.error("Failed to load Pyodide:", error);
-                }
+        // PWA Diagnostic Function
+        function runDiagnostics() {
+            const results = document.getElementById('diagnosticResults');
+            let diagnostics = [];
+            
+            // Check HTTPS
+            if (location.protocol === 'https:' || location.hostname === 'localhost') {
+                diagnostics.push('<div class="status success">✅ HTTPS: Secure connection detected</div>');
+            } else {
+                diagnostics.push('<div class="status error">❌ HTTPS: Secure connection required</div>');
             }
-            return pyodide;
+            
+            // Check Service Worker
+            if ('serviceWorker' in navigator) {
+                diagnostics.push('<div class="status success">✅ Service Worker: Supported</div>');
+            } else {
+                diagnostics.push('<div class="status error">❌ Service Worker: Not supported</div>');
+            }
+            
+            // Check beforeinstallprompt
+            if (deferredPrompt) {
+                diagnostics.push('<div class="status success">✅ Install Prompt: Available</div>');
+                document.getElementById('forceInstallBtn').style.display = 'inline-block';
+            } else {
+                diagnostics.push('<div class="status warning">⚠️ Install Prompt: Not triggered yet</div>');
+            }
+            
+            // Check if already installed
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                diagnostics.push('<div class="status success">✅ Already installed as PWA</div>');
+            } else {
+                diagnostics.push('<div class="status warning">📱 Not installed yet</div>');
+            }
+            
+            // Check manifest
+            const manifestLink = document.querySelector('link[rel="manifest"]');
+            if (manifestLink) {
+                diagnostics.push('<div class="status success">✅ Manifest: Linked</div>');
+            } else {
+                diagnostics.push('<div class="status error">❌ Manifest: Missing</div>');
+            }
+            
+            results.innerHTML = diagnostics.join('');
         }
-
-        // Initialize on load
-        initPyodide();
 
         // Calculator switching
         function showCalculator(calcId) {
-            // Hide all calculators
             document.querySelectorAll('.calculator').forEach(calc => {
                 calc.classList.remove('active');
             });
-            
-            // Remove active class from all buttons
             document.querySelectorAll('.nav-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
-            
-            // Show selected calculator
             document.getElementById(calcId).classList.add('active');
-            
-            // Add active class to clicked button
             event.target.classList.add('active');
         }
 
@@ -338,8 +361,8 @@ print(f"Squared: {squared}")
             resultDiv.innerHTML = `<div class="result">${sqfeet} sq ft = ${acres.toFixed(6)} acres</div>`;
         }
 
-        // Currency converter (mock rates for demo)
-        async function convertCurrency() {
+        // Currency converter
+        function convertCurrency() {
             const amount = parseFloat(document.getElementById('amount').value);
             const from = document.getElementById('fromCurrency').value;
             const to = document.getElementById('toCurrency').value;
@@ -350,12 +373,10 @@ print(f"Squared: {squared}")
                 return;
             }
             
-            // Mock exchange rates (in real app, you'd fetch from an API)
             const rates = {
-                'USD': { 'EUR': 0.85, 'GBP': 0.73, 'JPY': 110 },
-                'EUR': { 'USD': 1.18, 'GBP': 0.86, 'JPY': 129 },
-                'GBP': { 'USD': 1.37, 'EUR': 1.16, 'JPY': 150 },
-                'JPY': { 'USD': 0.0091, 'EUR': 0.0078, 'GBP': 0.0067 }
+                'USD': { 'EUR': 0.85, 'GBP': 0.73 },
+                'EUR': { 'USD': 1.18, 'GBP': 0.86 },
+                'GBP': { 'USD': 1.37, 'EUR': 1.16 }
             };
             
             if (from === to) {
@@ -368,101 +389,88 @@ print(f"Squared: {squared}")
             resultDiv.innerHTML = `<div class="result">${amount} ${from} = ${converted} ${to}</div>`;
         }
 
-        // Math calculator using Pyodide
-        async function calculateMath() {
-            const expression = document.getElementById('expression').value;
+        // Basic math calculator (no external dependencies)
+        function calculateBasicMath() {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            const operation = document.getElementById('operation').value;
             const resultDiv = document.getElementById('mathResult');
             
-            if (!expression.trim()) {
-                resultDiv.innerHTML = '<div class="result error">Please enter an expression</div>';
+            if (isNaN(num1) || isNaN(num2)) {
+                resultDiv.innerHTML = '<div class="result error">Please enter valid numbers</div>';
                 return;
             }
             
-            try {
-                await initPyodide();
-                const result = pyodide.runPython(`
-import math
-from math import *
-result = ${expression}
-result
-                `);
-                resultDiv.innerHTML = `<div class="result">${expression} = ${result}</div>`;
-            } catch (error) {
-                resultDiv.innerHTML = `<div class="result error">Error: ${error.message}</div>`;
-            }
-        }
-
-        // Custom code runner
-        async function runCustomCode() {
-            const code = document.getElementById('customCode').value;
-            const resultDiv = document.getElementById('customResult');
-            
-            if (!code.trim()) {
-                resultDiv.innerHTML = '<div class="result error">Please enter some Python code</div>';
-                return;
+            let result;
+            switch(operation) {
+                case '+': result = num1 + num2; break;
+                case '-': result = num1 - num2; break;
+                case '*': result = num1 * num2; break;
+                case '/': 
+                    if (num2 === 0) {
+                        resultDiv.innerHTML = '<div class="result error">Cannot divide by zero</div>';
+                        return;
+                    }
+                    result = num1 / num2; 
+                    break;
+                case '**': result = Math.pow(num1, num2); break;
+                default: result = 'Invalid operation';
             }
             
-            try {
-                await initPyodide();
-                
-                // Capture print output
-                pyodide.runPython(`
-import sys
-from io import StringIO
-sys.stdout = StringIO()
-                `);
-                
-                // Run user code
-                pyodide.runPython(code);
-                
-                // Get output
-                const output = pyodide.runPython('sys.stdout.getvalue()');
-                
-                resultDiv.innerHTML = `<div class="result"><pre>${output || 'Code executed successfully (no output)'}</pre></div>`;
-            } catch (error) {
-                resultDiv.innerHTML = `<div class="result error">Error: ${error.message}</div>`;
-            }
+            resultDiv.innerHTML = `<div class="result">${num1} ${operation === '**' ? '^' : operation} ${num2} = ${result}</div>`;
         }
 
         // Enhanced PWA Installation
         window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('🎉 beforeinstallprompt event fired!');
             e.preventDefault();
             deferredPrompt = e;
-            document.getElementById('installPrompt').style.display = 'block';
-            console.log('PWA installation prompt available');
+            
+            // Show install prompt immediately for debugging
+            setTimeout(() => {
+                document.getElementById('installPrompt').style.display = 'block';
+                runDiagnostics(); // Update diagnostics
+            }, 2000);
         });
 
-        function installPWA() {
+        function forceInstall() {
             if (deferredPrompt) {
                 deferredPrompt.prompt();
                 deferredPrompt.userChoice.then((choiceResult) => {
                     console.log('Installation choice:', choiceResult.outcome);
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('PWA installation accepted');
+                    }
                     deferredPrompt = null;
-                    hideInstallPrompt();
+                    runDiagnostics();
                 });
+            } else {
+                alert('Install prompt not available. Try adding to home screen manually via browser menu.');
             }
+        }
+
+        function installPWA() {
+            forceInstall();
+            hideInstallPrompt();
         }
 
         function hideInstallPrompt() {
             document.getElementById('installPrompt').style.display = 'none';
         }
 
-        // Enhanced Service Worker with better caching
-        const CACHE_NAME = 'python-calculator-v2';
+        // Simplified, working Service Worker
         const swCode = `
-const CACHE_NAME = 'python-calculator-v2';
-const urlsToCache = [
-  './',
-  'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js',
-  'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.asm.js',
-  'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.asm.wasm'
-];
+console.log('Service Worker: Starting...');
+
+const CACHE_NAME = 'pwa-calc-v1';
+const urlsToCache = ['./'];
 
 self.addEventListener('install', event => {
+  console.log('Service Worker: Install event');
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        console.log('Caching app shell');
+        console.log('Service Worker: Caching app shell');
         return cache.addAll(urlsToCache);
       })
   );
@@ -470,18 +478,8 @@ self.addEventListener('install', event => {
 });
 
 self.addEventListener('activate', event => {
-  event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheName !== CACHE_NAME) {
-            console.log('Deleting old cache:', cacheName);
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
-  );
+  console.log('Service Worker: Activate event');
+  event.waitUntil(self.clients.claim());
 });
 
 self.addEventListener('fetch', event => {
@@ -489,6 +487,7 @@ self.addEventListener('fetch', event => {
     caches.match(event.request)
       .then(response => {
         if (response) {
+          console.log('Service Worker: Serving from cache');
           return response;
         }
         return fetch(event.request);
@@ -505,67 +504,41 @@ self.addEventListener('fetch', event => {
             
             navigator.serviceWorker.register(swUrl)
                 .then(registration => {
-                    console.log('Service Worker registered successfully');
-                    
-                    // Check for updates
-                    registration.addEventListener('updatefound', () => {
-                        console.log('New app version available');
-                    });
+                    console.log('✅ Service Worker registered successfully');
+                    runDiagnostics();
                 })
                 .catch(error => {
-                    console.log('Service Worker registration failed:', error);
+                    console.log('❌ Service Worker registration failed:', error);
+                    runDiagnostics();
                 });
         }
 
-        // Save state to localStorage for persistence
-        function saveCalculatorState() {
-            const state = {
-                sqfeet: document.getElementById('sqfeet').value,
-                amount: document.getElementById('amount').value,
-                expression: document.getElementById('expression').value,
-                customCode: document.getElementById('customCode').value
-            };
-            localStorage.setItem('calculatorState', JSON.stringify(state));
-        }
+        // Run initial diagnostics
+        setTimeout(runDiagnostics, 1000);
 
-        function loadCalculatorState() {
-            const saved = localStorage.getItem('calculatorState');
-            if (saved) {
-                const state = JSON.parse(saved);
-                if (state.sqfeet) document.getElementById('sqfeet').value = state.sqfeet;
-                if (state.amount) document.getElementById('amount').value = state.amount;
-                if (state.expression) document.getElementById('expression').value = state.expression;
-                if (state.customCode) document.getElementById('customCode').value = state.customCode;
+        // Check for installation every few seconds
+        setInterval(() => {
+            installAttempts++;
+            if (installAttempts < 10) { // Only check for first 50 seconds
+                runDiagnostics();
             }
-        }
+        }, 5000);
 
-        // Auto-save on input changes
-        document.addEventListener('input', saveCalculatorState);
-        
-        // Load saved state on startup
-        window.addEventListener('load', loadCalculatorState);
-
-        // Add to home screen detection for iOS
+        // iOS detection and instructions
         function isIOS() {
             return /iPad|iPhone|iPod/.test(navigator.userAgent);
         }
 
-        function isStandalone() {
-            return window.matchMedia('(display-mode: standalone)').matches || 
-                   window.navigator.standalone === true;
-        }
-
-        // Show iOS-specific install instructions
-        if (isIOS() && !isStandalone()) {
+        if (isIOS()) {
             setTimeout(() => {
-                const iosPrompt = document.createElement('div');
-                iosPrompt.className = 'install-prompt';
-                iosPrompt.style.display = 'block';
-                iosPrompt.innerHTML = `
-                    📱 To install: Tap Share button → "Add to Home Screen"
-                    <button class="install-btn" onclick="this.parentElement.style.display='none'">Got it</button>
+                const iosInstructions = document.createElement('div');
+                iosInstructions.className = 'install-prompt';
+                iosInstructions.style.display = 'block';
+                iosInstructions.innerHTML = `
+                    📱 iOS: Tap Share (↗️) → "Add to Home Screen"
+                    <button class="install-btn" onclick="this.parentElement.remove()">Got it</button>
                 `;
-                document.body.appendChild(iosPrompt);
+                document.body.appendChild(iosInstructions);
             }, 3000);
         }
     </script>
