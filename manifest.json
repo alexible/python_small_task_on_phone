@@ -1,0 +1,24 @@
+{
+  "name": "Calculator PWA",
+  "short_name": "Calc PWA",
+  "description": "Simple calculator progressive web app",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#007bff",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3e%3crect width='100' height='100' fill='%23007bff'/%3e%3ctext x='50' y='55' text-anchor='middle' fill='white' font-size='40'%3e🧮%3c/text%3e%3c/svg%3e",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3e%3crect width='100' height='100' fill='%23007bff'/%3e%3ctext x='50' y='55' text-anchor='middle' fill='white' font-size='40'%3e🧮%3c/text%3e%3c/svg%3e",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
