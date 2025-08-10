@@ -4,7 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Python Calculator PWA</title>
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlB5dGhvbiBDYWxjdWxhdG9yIiwKICAic2hvcnRfbmFtZSI6ICJQeUNhbGMiLAogICJzdGFydF91cmwiOiAiLyIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzJlM2Q0ZCIsCiAgInRoZW1lX2NvbG9yIjogIiMyZTNkNGQiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSFpwWlhkQ2IzZzlJakFnTUNBNU5pQTVOaUlnWm1sc2JEMGlJek0xT1RJMk55SStQR05wY21Oc1pTQmplRDBpTkRnaUlHTjVQU0kwT0NJZ2NqMGlNemNpSUdacGJHeDBjajBpZEhKMVpTSStQQzlqYVhKamJHVStQR3g4YTJndFoyeDVjR2dnZUQxSlRUTTJMakk1YXpVdU1EZ3VOREIwTnk0MFRTNDBNVGN0TVM0eE1qZzJMemd0TWpRdE1UZ3hkaklnWkdGMFlTMXViR0Z1WjNWaFoyVTlRM0lpSUdScGRHRmphR1Z5TFRWdGJYTm5hV1E5SWs1RldrODBVSFY2Zg0=PSI+PC9nPjwvc3ZnPg==IiwKICAgICAgInNpemVzIjogIjk2eDk2IiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIKICAgIH0KICBdCn0=">
+    
+    <!-- PWA Manifest with proper calculator icon -->
+    <link rel="manifest" href="data:application/json;charset=utf-8;base64,ewogICJuYW1lIjogIlB5dGhvbiBDYWxjdWxhdG9yIiwKICAic2hvcnRfbmFtZSI6ICJQeUNhbGMiLAogICJkZXNjcmlwdGlvbiI6ICJQb3J0YWJsZSBQeXRob24gY2FsY3VsYXRvcnMgZm9yIGV2ZXJ5ZGF5IHVzZSIsCiAgInN0YXJ0X3VybCI6ICIuLyIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzJlM2Q0ZCIsCiAgInRoZW1lX2NvbG9yIjogIiM0Mjk5ZTEiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQUhBQUFBQndDQVlBQUFEeGNRLzFBQUFBQjNOSlRVVUhCeVF5Rnc0Rm80VExHQTlRb1dCa3hCZ3BOV1V3SmpHU21NVUJGUHF6Ykd5U0VBc01Wc1lBT3NYQnhhQWVUUlNxbTVIUVFBQmtRTFFBUStaQW5Dc293a1JmNHVObzJQeGY3Z2tGS0FqUzE0WHBMSm1MalF4Tk9YV1JPQkxmOW5VZlVYKzY2L0F3VkZBS1VEa3g3VmVybDZCdjJKM3BXY3l3R01VUURkNWY4d0FSSE1oQzJVbDBsa0JPaG12b2VsSklFc0NGQkFuS0Q5Zmh3WjUzUXFxVEVBQUJJZEpaQUJ1ZHU0b3ZNUFNRSGJka01TQlUzT1Y3TmhlbFFlRGJKY0hCNFVMdHg5QjZEZ2Z2TlJLWmExdGZDSWFmVE9jQWZseFFKNjZub3VqWnVXMnJ3TnhpdUJSQWpkNGZKZXZORHFmNmE2T1o2MmRqbG1nR2pOMVhqWjJaQ1dLVGNYL3FBYWFJQTJnLzFwTVZSSjI3emZ2R0FlVzJVNXdRaUJJT3EwU1l0MUtHdGNuT1hUNFVLdkl0WkRpQ2pUNlU3STNhdjJOK0d6TEF3Yjc4UGZNNElOejEyL3FJMGlqUDVXSFdKZEpUZm51RXZsaHQ4TVk5Q0lvUXJCZllwbFdqS2dDYWlUeUh1UjNWcFYraVNBMXQ2M2xEckNEbWJCTlFmL3pkdjZYVzZta1RGYUJmZ1MwMVhxaVlTTjBFeWI3dmlpT200dzZSZVJUK0ZUaVJEWjdmSTlUUk9kZkpEV1hBVXdMclB4UzNvZ0VoZGJOUW1lU0lLUndDUDczSDd0Q0t6VGFabzF3RTJ0UUpRaWFFcExoRXVIM2t4SWxvTGNpZU9qZ1dQdUJIQ2dqN2VDS3liQnVRS1ZKWUNBUUFMQUJJNDZ1cGdyNDJzOFBOUDJiTm1LZlBHd2N6a0FTNWpHa1k1RCtBOFZ1OCtUSXZEd29OV3kzWjdWWHVZeU9YQ0l2aXNSTUlmVGZNbGJveUl0T2VGT0dxQkxoWm1OVkN3SllIVGpRQklhRUJYdDNLTXJRQ0Nvd0w3UDNUWDN4ME1nWGsyVE5ORkJEV0E5emxUWWFVK09VTGdHNElYVGNOTThIR1V3MHljVG9pOE82dnZKQVV0dWZCMmdNMU9OMEhSazVtN2J2emt5anVrbE95Smhxd0NMbVNNNDVxNlBUaXUzVjhIa0FJYVpxOEFRSG5jVjkwd3FsUE53WUJrSmY4TEZOQzdLVWNtRUs0MEtuNHJwVkhURUpqZktVSlZIU3kyTERwcktNN0tzQWlSQUVBREcrVVZWZkZocGNQQXMxeHE0Y3JyVkNpYmVDNW9GaXUxa0dnZlZYdkEyUE5OQUNKVWdYQkNGMFNlUllLZiswSkJCZ2pyWElqYW9nOGV2YnU3dElwVkxuWHRYbW9rSXZKdzhpZEVKL3Rua1UvZ0dCQkZ4S3U4bkJLVi9oKzhmNE9WU0VDSkFqWVdIWkc5UlFTdGM1YnVGcFg3cWU0aVp6RWowTnhWTVFQWDI0ZGhzUWJrN0xGK0JVc0MwanpBaDN6azJZS1NKK1EvZk0xSENHcE9lcmp1TzRob0xScU5PdjVBZldRdFJ2amtLQUZFakNNZkw4Q3BOcWNHMGVjPSIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQUhBQUFBQndDQVlBQUFEeGNRLzFBQUFBQjNOSlRVVUhCeVF5Rnc0Rm80VExHQTlRb1dCa3hCZ3BOV1V3SmpHU21NVUJGUHF6Ykd5U0VBc01Wc1lBT3NYQnhhQWVUUlNxbTVIUVFBQmtRTFFBUStaQW5Db293a1JmNHVObzJQeGY3Z2tGS0FqUzE0WHBMSm1MalF4Tk9YV1JPQkxmOW5VZlVYKzY2L0F3VkZBS1VEa3g3VmVybDZCdjJKM3BXY3l3R01VUURkNWY4d0FSSE1oQzJVbDBsa0JPaG12b2VsSklFc0NGQkFuS0Q5Zmh3WjUzUXFxVEVBQUJJZEpaQUJ1ZHU0b3ZNUFNRSGJka01TQlUzT1Y3TmhlbFFlRGJKY0hCNFVMdHg5QjZEZ2Z2TlJLWmExdGZDSWFmVE9jQWZseFFKNjZub3VqWnVXMnJ3TnhpdUJSQWpkNGZKZXZORHFmNmE2T1o2MmRqbG1nR2pOMVhqWjJaQ1dLVGNYL3FBYWFJQTJnLzFwTVZSSjI3emZ2R0FlVzJVNXdRaUJJT3EwU1l0MUtHdGNuT1hUNFVLdkl0WkRpQ2pUNlU3STNhdjJOK0d6TEF3Yjc4UGZNNElOejEyL3FJMGlqUDVXSFdKZEpUZm51RXZsaHQ4TVk5Q0lvUXJCZllwbFdqS2dDYWlUeUh1UjNWcFYraVNBMXQ2M2xEckNEbWJCTlFmL3pkdjZYVzZta1RGYUJmZ1MwMVhxaVlTTjBFeWI3dmlpT200dzZSZVJUK0ZUaVJEWjdmSTlUUk9kZkpEV1hBVXdMclB4UzNvZ0VoZGJOUW1lU0lLUndDUDczSDd0Q0t6VGFabzF3RTJ0UUpRaWFFcExoRXVIM2t4SWxvTGNpZU9qZ1dQdUJIQ2dqN2VDS3liQnVRS1ZKWUNBUUFMQUJJNDZ1cGdyNDJzOFBOUDJiTm1LZlBHd2N6a0FTNWpHa1k1RCtBOFZ1OCtUSXZEd29OV3kzWjdWWHVZeU9YQ0l2aXNSTUlmVGZNbGJveUl0T2VGT0dxQkxoWm1OVkN3SllIVGpRQklhRUJYdDNLTXJRQ0Nvd0w3UDNUWDN4ME1nWGsyVE5ORkJEV0E5emxUWWFVK09VTGdHNElYVGNOTThIR1V3MHljVG9pOE82dnZKQVV0dWZCMmdNMU9OMEhSazVtN2J2emt5anVrbE95Smhxd0NMbVNNNDVxNlBUaXUzVjhIa0FJYVpxOEFRSG5jVjkwd3FsUE53WUJrSmY4TEZOQzdLVWNtRUs0MEtuNHJwVkhURUpqZktVSlZIU3kyTERwcktNN0tzQWlSQUVBREcrVVZWZkZocGNQQXMxeHE0Y3JyVkNpYmVDNW9GaXUxa0dnZlZYdkEyUE5OQUNKVWdYQkNGMFNlUllLZiswSkJCZ2pyWElqYW9nOGV2YnU3dElwVkxuWHRYbW9rSXZKdzhpZEVKL3Rua1UvZ0dCQkZ4S3U4bkJLVi9oKzhmNE9WU0VDSkFqWVdIWkc5UlFTdGM1YnVGcFg3cWU0aVp6RWowTnhWTVFQWDI0ZGhzUWJrN0xGK0JVc0MwanpBaDN6azJZS1NKK1EvZk0xSENHcE9lcmp1TzRob0xScU5PdjVBZldRdFJ2amtLQUZFakNNZkw4Q3BOcWNHMGVjPSIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfQogIF0sCiAgImNhdGVnb3JpZXMiOiBbInV0aWxpdGllcyIsICJlZHVjYXRpb24iLCAicHJvZHVjdGl2aXR5Il0sCiAgImxhbmciOiAiZW4iLAogICJkaXIiOiAibHRyIgp9">
+    
+    <!-- Apple-specific PWA meta tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="PyCalc">
+    <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHAAAABwCAYAAADxcQ/1AAAAB3NJTUUHByQyFw4Fo4TLGA9QoWBkxBgpNWUwJjGSmMUBFPqzbGySEAsMVsYAOsXBxaAeTRSqm5HQQABkQTQAQ+ZAnCowkRf4uNo2Pxf7gkFKAjS14XpLJmLjQxNOXWROBLf9nUfUX+66/AwVFAKUDkx7Verl6Bv2J3pWcywGMUQDd5f8wARHMhC2Ul0lkBOhmvoelJIEsCFBAnKD9fhwZ53QqqTEAABIdJZABudu4ovMPSQHbdkMSBU3OV7NhelQeDbJcHB4ULtx9B6DgfvNRKZa1tfCIafTOcAflxQJ66noujZuW2rwNxiuBRAjd4fJevNDqf6a6OZ62djlmgGjN1XjZ2ZCWKTcX/qAaaIA2g/1pMVRJ27zfvGAeW2U5wQiBIOq0SYt1KGtcnOXT4UKvItZDiCjT6U7I3av2N+GzLAwb78PfM4INz12/qI0ijP5WHWJdJTfnuEvlht8MY9CIoQrBfYplWjKgCaiTyHuR3VpV+iSA1t63lDrCDmbBNQf/zdv6XW6mkTFaBfgS01XqiYSN0Eyb7viiOm4w6ReRT+FTiRDZ7fI9TROdfJDWXAUwLrPxS3ogEhdbNQmeSIKRwCP73H7tCKzTaZo1wE2tQJQiakpLhEuH3kxIloLcieOjgWPuBHCgj7eCKybBuQKVJYCAALABI46upgr42s8PNP2bNmKfPGwczkAS5jGkY5D+A8Vu8+TIvDwoNWy3Z7VXuYyOXCIvisRMIfTfMlboyItOeFOGqBLhZmNVCwJYHTjQBIaEBXt3KMrQCCowL7P3TX3x0MgXk2TNEFBDWA9zlTYaU+OULgG4IXTcNM8HGUw0ycToi8O6vvJAUtufB2gM1ON0HRk5m7bvzkyjuklOyJhqwCLmSM45q6PTiu3V8HkAIaZq8AQHncV90wqlPNwYBkJf8LFNC7KUcmEK40Kn4rpVHTEJjfKUJVHSy2LDprKM7KsAiRAEADG+UVVfFhpcPAs1xq4crrVCibeC5oFiu1kGgfVXvA2PNNACJUgXBCF0SeRYKf+0JBBgjrXIjaog8evbu7tIpVLnXtXmokIvJw8idEJ/tnkU/gGBBFxKu8nBKV/h+8f4OVSECJAjYWHZG9RQStc5buFpX7qe4iZzEj0NxVMQPX24dhsQbk7LF+BUsC0jzAh3zk2YKSJ+Q/fM1HCGpOerjuO4hoLRqNOv5AfWQtRvjkKAFEjCMfL8CpNqcG0ec=">
+    
     <style>
         * {
             margin: 0;
@@ -184,7 +193,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🐍 Python Calculator PWA</h1>
+            <h1> Python Calculator PWA</h1>
             <p>Portable calculators with Python power</p>
         </div>
         
@@ -415,17 +424,19 @@ sys.stdout = StringIO()
             }
         }
 
-        // PWA Installation
+        // Enhanced PWA Installation
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
             document.getElementById('installPrompt').style.display = 'block';
+            console.log('PWA installation prompt available');
         });
 
         function installPWA() {
             if (deferredPrompt) {
                 deferredPrompt.prompt();
                 deferredPrompt.userChoice.then((choiceResult) => {
+                    console.log('Installation choice:', choiceResult.outcome);
                     deferredPrompt = null;
                     hideInstallPrompt();
                 });
@@ -436,10 +447,74 @@ sys.stdout = StringIO()
             document.getElementById('installPrompt').style.display = 'none';
         }
 
-        // Service Worker Registration
+        // Enhanced Service Worker with better caching
+        const CACHE_NAME = 'python-calculator-v2';
+        const swCode = `
+const CACHE_NAME = 'python-calculator-v2';
+const urlsToCache = [
+  './',
+  'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js',
+  'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.asm.js',
+  'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.asm.wasm'
+];
+
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache => {
+        console.log('Caching app shell');
+        return cache.addAll(urlsToCache);
+      })
+  );
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cacheName => {
+          if (cacheName !== CACHE_NAME) {
+            console.log('Deleting old cache:', cacheName);
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
+  );
+});
+
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request)
+      .then(response => {
+        if (response) {
+          return response;
+        }
+        return fetch(event.request);
+      }
+    )
+  );
+});
+        `;
+
+        // Register Service Worker
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('data:text/javascript;base64,Y29uc3QgQ0FDSEVfTkFNRSA9ICdweXRob24tY2FsY3VsYXRvci12MSc7CmNvbnN0IHVybHNUb0NhY2hlID0gWwogICcvJywKICAnaHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L3B5b2RpZGUvdjAuMjQuMS9mdWxsL3B5b2RpZGUuanMnCl07CgpzZWxmLmFkZEV2ZW50TGlzdGVuZXIoJ2luc3RhbGwnLCBldmVudCA9PiB7CiAgZXZlbnQud2FpdFVudGlsKAogICAgY2FjaGVzLm9wZW4oQ0FDSEVfTkFNRSkKICAgICAgLnRoZW4oY2FjaGUgPT4gY2FjaGUuYWRkQWxsKHVybHNUb0NhY2hlKSkKICApOwp9KTsKCnNlbGYuYWRkRXZlbnRMaXN0ZW5lcignZmV0Y2gnLCBldmVudCA9PiB7CiAgZXZlbnQucmVzcG9uZFdpdGgoCiAgICBjYWNoZXMubWF0Y2goZXZlbnQucmVxdWVzdCkKICAgICAgLnRoZW4ocmVzcG9uc2UgPT4gewogICAgICAgIHJldHVybiByZXNwb25zZSB8fCBmZXRjaChldmVudC5yZXF1ZXN0KTsKICAgICAgfSkKICApOwp9KTs=')
-                .then(() => console.log('Service Worker registered'));
+            const blob = new Blob([swCode], { type: 'application/javascript' });
+            const swUrl = URL.createObjectURL(blob);
+            
+            navigator.serviceWorker.register(swUrl)
+                .then(registration => {
+                    console.log('Service Worker registered successfully');
+                    
+                    // Check for updates
+                    registration.addEventListener('updatefound', () => {
+                        console.log('New app version available');
+                    });
+                })
+                .catch(error => {
+                    console.log('Service Worker registration failed:', error);
+                });
         }
 
         // Save state to localStorage for persistence
@@ -469,6 +544,30 @@ sys.stdout = StringIO()
         
         // Load saved state on startup
         window.addEventListener('load', loadCalculatorState);
+
+        // Add to home screen detection for iOS
+        function isIOS() {
+            return /iPad|iPhone|iPod/.test(navigator.userAgent);
+        }
+
+        function isStandalone() {
+            return window.matchMedia('(display-mode: standalone)').matches || 
+                   window.navigator.standalone === true;
+        }
+
+        // Show iOS-specific install instructions
+        if (isIOS() && !isStandalone()) {
+            setTimeout(() => {
+                const iosPrompt = document.createElement('div');
+                iosPrompt.className = 'install-prompt';
+                iosPrompt.style.display = 'block';
+                iosPrompt.innerHTML = `
+                    📱 To install: Tap Share button → "Add to Home Screen"
+                    <button class="install-btn" onclick="this.parentElement.style.display='none'">Got it</button>
+                `;
+                document.body.appendChild(iosPrompt);
+            }, 3000);
+        }
     </script>
 </body>
 </html>
